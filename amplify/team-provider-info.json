@@ -1,0 +1,24 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-aitale-dev-174052-authRole",
+      "UnauthRoleArn": "arn:aws:iam::945733084271:role/amplify-aitale-dev-174052-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::945733084271:role/amplify-aitale-dev-174052-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-aitale-dev-174052-deployment",
+      "UnauthRoleName": "amplify-aitale-dev-174052-unauthRole",
+      "StackName": "amplify-aitale-dev-174052",
+      "StackId": "arn:aws:cloudformation:us-east-1:945733084271:stack/amplify-aitale-dev-174052/2295bce0-a9d9-11ee-b434-0ebc04faf3cf",
+      "AmplifyAppId": "d2gfxjgy7onsbp"
+    },
+    "categories": {
+      "auth": {
+        "aitale54329fa6": {},
+        "aitale": {}
+      },
+      "api": {
+        "aitale": {}
+      }
+    }
+  }
+}

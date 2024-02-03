@@ -1,0 +1,44 @@
+type User @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  email: String!
+  userId: String!
+  username: String!
+  name: String!
+  posts: [String]
+  savedPosts: [String]
+  interests: [String]
+  followers: [String]
+  likedPosts: [String]
+  dislikedPosts: [String]
+  viewedPosts: [String]
+  credits: Int
+}
+
+type Post @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  title: String!
+  thumbnailUrl: String!
+  userId: String!
+  username: String!
+  views: Int!
+  dateCreated: AWSDateTime!
+  likes: Int!
+  dislikes: Int!
+  saves: Int!
+  nextParts: Int
+  hashtags: [String]
+  postDetails: PostDetails
+}
+
+type PostDetails {
+  title: String!
+  content: String!
+}
+
+type Hashtag @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  hashtag: String!
+  imageUrl: String
+  postIds: [String]
+}
+ 

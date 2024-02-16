@@ -42,9 +42,12 @@
         },
         "signupAttributes": [
           "EMAIL",
-          "PREFERRED_USERNAME"
+          "NAME",
+          "GIVEN_NAME"
         ],
-        "socialProviders": [],
+        "socialProviders": [
+          "GOOGLE"
+        ],
         "usernameAttributes": [
           "EMAIL"
         ],

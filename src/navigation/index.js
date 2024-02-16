@@ -69,18 +69,29 @@ const Navigation = () => {
       return null;
     }
   };
+   // Function to generate a random string of specified length
+   const generateRandomString = length => {
+    const characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let result = '';
+    for (let i = 0; i < length; i++) {
+      result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+  };
   const checkUser = async () => {
     
+    console.log("sssss");
     try {
       const authUser = await getCurrentUser();
+      console.log("authUser ", authUser);
       const user = await fetchUserAttributes();
-      //console.log(authUser);
-      console.log("wffe        ",user);
-      if(user.name == "value"){
+      console.log("user ", user);
+      const generatedUsername = user.name.slice(0, 4).toLowerCase().replace(/\s/g, '_') + generateRandomString(5);
+      if (user.given_name && user.given_name.length < 10){
         let userData = {
           email: user.email,
           userId: user.sub,
-          username: user.preferred_username,
+          username: generatedUsername,
           name: user.name,
           posts: [],
           savedPosts: [],
@@ -98,11 +109,11 @@ const Navigation = () => {
         });
         console.log('User created successfully:', resul.data.createUser);
 
-        const userId = result.data.createUser.id;
+        const userId = resul.data.createUser.id;
         userData.id = userId;
         await storeData('userdreamer',userData);
         const result = await updateUserAttributes({userAttributes:{
-          name: userId}
+          given_name: userId}
         });
         const userw = await fetchUserAttributes();
         console.log(userw);
@@ -117,7 +128,7 @@ const Navigation = () => {
           const user = await fetchUserAttributes();
           const response = await client.graphql({
             query: getUser,
-            variables: { id: user.name },
+            variables: { id: user.given_name },
           });
           const use = response.data.getUser;
           await storeData('userdreamer', use);
@@ -126,6 +137,8 @@ const Navigation = () => {
       console.log("----------------------------")
       setUser(authUser);
     } catch (e) {
+      console.log("erororor ",e);
+      
       setUser(null);
     }
   };

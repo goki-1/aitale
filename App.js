@@ -9,13 +9,14 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import Navigation from './src/navigation';
-
+import Create from './Create';
 
 const App = () => {
   // Auth.signOut();
   return (
     <SafeAreaView style={styles.root}>
-      <Navigation />
+      {/* <Navigation /> */}
+      <Create/>
     </SafeAreaView>
   );
 };

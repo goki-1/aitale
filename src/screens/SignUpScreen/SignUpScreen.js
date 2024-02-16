@@ -23,10 +23,10 @@ const SignUpScreen = () => {
 
     try {
       await signUp({
-        username: generatedUsername,
+        username: email,
         password,
         options: {
-          userAttributes: { email, name, preferred_username: generatedUsername },
+          userAttributes: { email, name,  given_name: generatedUsername },
         },
       });
 

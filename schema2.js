@@ -732,3 +732,4 @@ export default HomeScreen;
   //     postUser.followers = [...postUser.followers, currentUser];
   //   }
   // };
+

@@ -3,7 +3,7 @@ import { Image, View, Animated, StyleSheet, TouchableOpacity, Text, Dimensions }
 import { BlurView } from '@react-native-community/blur';
 const SCREEN_WIDTH = Dimensions.get('window').width / 1.028;
 const SCREEN_HEIGHT = Dimensions.get('window').height / 2.8;
-const PANEL_DURATION = 5000; // 6 seconds
+const PANEL_DURATION = 5000; 
 import Tts from 'react-native-tts';
 charactersVoiceMap = {};
 

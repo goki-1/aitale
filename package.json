@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@aws-amplify/react-native": "^1.0.9",
+    "@aws-amplify/rtn-web-browser": "^1.0.15",
     "@aws-amplify/ui-react-native": "^2.0.7",
     "@google-cloud/text-to-speech": "^5.0.0",
     "@react-native-async-storage/async-storage": "^1.21.0",

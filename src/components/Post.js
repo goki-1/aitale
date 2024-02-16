@@ -142,7 +142,7 @@ const Post = ({ id, tags, title, views, date, user, userid, image, likes, dislik
         
         <TouchableOpacity style={styles.borderButton} onPress={handleBranchPress}>
           <MaterialCommunityIcons name="animation-play" size={25} color="#ddd" />
-          <Text style={styles.detailsTe}>Next Parts  </Text>
+          <Text style={styles.detailsTe}>Next  </Text>
         </TouchableOpacity>
         <View style={styles.detailsContainer}>
             <Text style={styles.detailsText}>{formattedDate}</Text>

@@ -24,7 +24,7 @@ function generateCustomSchema(characters) {
       "famous/well-known character": {
         properties: {
           "played_by_actor": { "type": "string", enum:["yes", "no"], description:"return yes if it is a character played by movie stars, return no if it some cartoon or anything else with no real human face"},
-          "full name": { "type": "string", description:"full name of the actor playing it"},
+          "full name": { "type": "string", description: "full name of the actor playing it"},
           "costume": { "type": "string", "description": "list what kind/color of costume he is wearing, give details, customize it if user asks for it" },
           "aditional_details": { "type": "string", "description": "any other details regarding visual appearance including like cartoon or realistic or anime" }
         },
@@ -39,10 +39,10 @@ function generateCustomSchema(characters) {
       },
       "animal": {
         properties: {
-          "costume_colors": { "type": "string", "description": "List the primary colors of the character's costume." },
-          "powers": { "type": "string", "description": "Describe the character's powers or abilities." }
+          "color": { "type": "string", "description": "what is their color" },
+          "breed": { "type": "string", "description": "what type of breed is it" }
         },
-        required: ["costume_colors", "powers"]
+        required: ["color", "breed"]
       },
       "monster": {
         properties: {

@@ -17,16 +17,16 @@ function generateCustomSchema(characters) {
           "hair style and color": { "type": "string", "description": "Detail the character's hair style and color for visual accuracy." },
           "clothes_upper": { "type": "string", "description": "Describe the upper body clothing, including color and type." },
           "clothes_lower": { "type": "string", "description": "Describe the lower body clothing, including color and type." },
-          "aditional_details": { "type": "string", "description": "any other other details regarding visual appearance.like cartoon or realitic or anime" }
+          "aditional_details": { "type": "string", "description": "any other details regarding visual appearance like cartoon or realistic or anime" }
         },
         required: ["full name", "age", "gender", "ethnicity", "hair style and color", "clothes_upper", "clothes_lower"]
       },
-      "famous/well known character": {
+      "famous/well-known character": {
         properties: {
           "played_by_actor": { "type": "string", enum:["yes", "no"], description:"return yes if it is a character played by movie stars, return no if it some cartoon or anything else with no real human face"},
           "full name": { "type": "string", description:"full name of the actor playing it"},
-          "costume": { "type": "string", "description": "list what kind/color of costume he is wearing, give details" },
-          "aditional_details": { "type": "string", "description": "any other other details regarding visual appearance.like cartoon or realitic or anime" }
+          "costume": { "type": "string", "description": "list what kind/color of costume he is wearing, give details, customize it if user asks for it" },
+          "aditional_details": { "type": "string", "description": "any other details regarding visual appearance including like cartoon or realistic or anime" }
         },
         required: ["costume", "played_by_actor"]
       },

@@ -238,5 +238,48 @@ const transformJson = (originalJson) => {
 };
 
  
-data = transformJson(data);
-console.log(JSON.stringify(data, null, 2))
+//data = transformJson(data);
+function modifyPanelsForNarratorAndDialogueLength(panels) {
+  let lastCharacterPanel = null;
+
+  panels.forEach(panel => {
+    // For narrator panels, add characters from the last character dialogue panel
+    if (panel.type === 'narrator' && lastCharacterPanel) {
+      panel.content.push(...lastCharacterPanel.content.map(character => {
+        return { ...character, dialogue: "" }; // Copy characters without dialogue
+      }));
+    }
+
+    // For single dialogue panels with long dialogues, add characters from the last character dialogue panel
+    if (panel.type === 'character dialogues single') {
+      panel.content.forEach(content => {
+        if (content.dialogue.length > 40 && lastCharacterPanel) {
+          panel.content.push(...lastCharacterPanel.content.filter(c => c.character !== content.character).map(character => {
+            return { ...character, dialogue: "" }; // Copy characters without dialogue
+          }));
+        }
+      });
+    }
+
+    // Keep track of the last character dialogue panel
+    if (panel.type === 'character dialogues' || panel.type === 'character dialogues single') {
+      lastCharacterPanel = panel;
+    }
+  });
+
+  return panels;
+}
+
+// Extend transformJson to include modifyPanelsForNarratorAndDialogueLength processing
+const transformJsonExtended = (originalJson) => {
+  const transformedJson = transformJson(originalJson); // Use the existing transformation logic
+
+  // Modify panels as per the new requirements
+  transformedJson.panels = modifyPanelsForNarratorAndDialogueLength(transformedJson.panels);
+
+  return transformedJson;
+};
+
+// Assuming 'data' is the original JSON object you provided
+const transformedData = transformJsonExtended(data);
+console.log(JSON.stringify(transformedData, null, 2));

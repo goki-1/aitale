@@ -31,11 +31,7 @@ data = {
       {
         "type": "character dialogues",
         "content": [
-          {
-            "character": "Narrator",
-            "dialogue": "As they board their ship, the salty breeze carries whispers of the pirate crew's fearsome reputation.",
-            "tone": "neutral"
-          },
+         
           {
             "character": "Aquaman",
             "dialogue": "The ocean beckons us, Goku. Let's sail towards the unknown!",
@@ -143,35 +139,33 @@ data = {
 const createCharacterDialogueSinglePanel = (parentPanel, character, index, initialAppearances) => {
   const isInitialAppearance = !initialAppearances.includes(character.character);
 
-if (character.character === 'Narrator') {
-  if (isInitialAppearance) {
-    initialAppearances.push(character.character);
-  }
-    const cameraMovement = isInitialAppearance
-      ? { camera_movement: 'left to right' }
-      : { camera_movement: 'right to left' };
-
-    return [{
-      type: 'narrator',
-      content: [{
-        character: character.character,
-        dialogue: character.dialogue.trim(), // Remove leading/trailing whitespaces
-        gen_id: character.gen_id,
-        tone: character.tone,
-      }],
-      background_music: parentPanel.background_music,
-      index: index,
-      gen_id: parentPanel.gen_id,
-      ...cameraMovement,
-    }];
-  }
-
   const dialogues = character.dialogue.split(/[.,]/).filter(dialogue => dialogue.trim() !== "" 
   && dialogue.trim() !== "." && dialogue.trim() !== ",");
 
-
   const panels = dialogues.map((dialogue, i) => {
-    
+    // Update the condition to check if it's the narrator and isFirstNarratorPanel
+    if (character.character === 'Narrator') {
+
+      if (isInitialAppearance) {
+        initialAppearances.push(character.character);
+      }
+        const cameraMovement = isInitialAppearance
+          ? { camera_movement: 'left to right' }
+          : { camera_movement: 'right to left' };
+
+        return {
+          type: 'narrator',
+          content: [{
+            character: character.character,
+            dialogue: dialogue.trim(), // Remove leading/trailing whitespaces
+            tone: character.tone,
+          }],// Do not add any character for the first narrator panel
+          background_music: parentPanel.background_music,
+          index: index + i,
+          genId: parentPanel.genId,
+          ...cameraMovement,
+        };
+    } 
     const cameraMovement = isInitialAppearance && dialogue.length > 30
     ? { camera_movement: 'zoom in and up' }
     : { camera_movement: dialogue.length > 10 ? 'close up' : 'some random zoom in' };
@@ -181,12 +175,11 @@ if (character.character === 'Narrator') {
       content: [{
         character: character.character,
         dialogue: dialogue.trim(), // Remove leading/trailing whitespaces
-        gen_id: character.gen_id,
         tone: character.tone,
       }],
       background_music: parentPanel.background_music,
       index: index + i,
-      gen_id: parentPanel.gen_id,
+      genId: parentPanel.genId,
       ...cameraMovement,
     };
   });
@@ -241,22 +234,32 @@ const transformJson = (originalJson) => {
 //data = transformJson(data);
 function modifyPanelsForNarratorAndDialogueLength(panels) {
   let lastCharacterPanel = null;
-
+  let b = 0;
+  const modifiedPanels = []; // Use a new array to store the modified panels
+  let ind = 0;
   panels.forEach(panel => {
+    if (panel.type === 'character dialogues') b = -1;
+    else b += 1;
+
+    // Directly add the current panel to the modifiedPanels array
+    modifiedPanels.push(panel);
+
     // For narrator panels, add characters from the last character dialogue panel
-    if (panel.type === 'narrator' && lastCharacterPanel) {
-      panel.content.push(...lastCharacterPanel.content.map(character => {
-        return { ...character, dialogue: "" }; // Copy characters without dialogue
-      }));
+    if (panel.type === 'narrator' && lastCharacterPanel && b > 0) {
+      panel.content.push(...lastCharacterPanel.content.map(character => ({
+        ...character,
+        dialogue: "" // Copy characters without dialogue
+      })));
     }
 
     // For single dialogue panels with long dialogues, add characters from the last character dialogue panel
     if (panel.type === 'character dialogues single') {
       panel.content.forEach(content => {
         if (content.dialogue.length > 40 && lastCharacterPanel) {
-          panel.content.push(...lastCharacterPanel.content.filter(c => c.character !== content.character).map(character => {
-            return { ...character, dialogue: "" }; // Copy characters without dialogue
-          }));
+          panel.content.push(...lastCharacterPanel.content.filter(c => c.character !== content.character).map(character => ({
+            ...character,
+            dialogue: "" // Copy characters without dialogue
+          })));
         }
       });
     }
@@ -265,10 +268,24 @@ function modifyPanelsForNarratorAndDialogueLength(panels) {
     if (panel.type === 'character dialogues' || panel.type === 'character dialogues single') {
       lastCharacterPanel = panel;
     }
+
+    // Check for objectGenId and create an additional "object" panel
+    if (panel.objectGenId) {
+      const objectPanel = {
+        type: 'object',
+        content: [],
+        objectGenId: panel.objectGenId,
+        camera_movement: "zoom in",
+        index: ind, // Increment the index slightly to insert after the current panel
+      };
+      modifiedPanels.push(objectPanel); // Add the new object panel to the modifiedPanels array
+    }
+    ind ++;
   });
 
-  return panels;
+  return modifiedPanels; // Return the array with the added object panels
 }
+
 
 // Extend transformJson to include modifyPanelsForNarratorAndDialogueLength processing
 const transformJsonExtended = (originalJson) => {

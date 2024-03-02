@@ -19,6 +19,16 @@ data = {
             "character": "Aquaman",
             "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
             "tone": "neutral"
+          },
+          {
+            "character": "Hero2",
+            "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
+            "tone": "neutral"
+          },
+          {
+            "character": "Hero2",
+            "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
+            "tone": "neutral"
           }
         ],
         "fight_in_this_panel": "no fight",
@@ -112,11 +122,14 @@ data = {
         "character_type": "comic/movie character who walks on two legs",
         "sound": "male",
         "size": "normal 5'10 feet",
-        "role": "hero",
+        "role": "hero/good",
         "description": "Goku, Son Goku, Orange outfit with a blue sash, black wristbands and boots, spiky black hair, and a tail",
         "poseImageIds": {
-          "front pose standing still": "766ee8dd-b188-4801-9110-825a67ae0ff8",
-          "side pose standing still(left facing)": "daad58fe-a22f-4359-8062-2731f9f37c3a",
+          "front pose standing still": "front pose standing still",
+          "side pose standing still(left facing)": "side pose standing still(left facing)",
+          "side pose standing still(right facing)": "side pose standing still(right facing)",
+          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
+          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
         }
       },
@@ -125,14 +138,65 @@ data = {
         "character_type": "comic/movie character who walks on two legs",
         "sound": "male",
         "size": "normal 5'10 feet",
-        "role": "hero",
+        "role": "hero/good",
         "description": "Aquaman, Arthur Curry, Golden and green scale armor with a trident",
         "poseImageIds": {
-          "front pose standing still": "766ee8dd-b188-4801-9110-825a67ae0ff8",
-          "side pose standing still(left facing)": "daad58fe-a22f-4359-8062-2731f9f37c3a",
+          "front pose standing still": "front pose standing still",
+          "side pose standing still(left facing)": "side pose standing still(left facing)",
+          "side pose standing still(right facing)": "side pose standing still(right facing)",
+          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
+          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
         }
+      },
+      {
+      "character": "Hero2",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "female",
+      "size": "normal 5'7 feet",
+      "role": "hero/good",
+      "description": "Hero2, a skilled archer with unmatched accuracy, wears a green and brown leather outfit, equipped with a quiver of arrows.",
+      "poseImageIds": {
+        "front pose standing still": "front pose standing still",
+          "side pose standing still(left facing)": "side pose standing still(left facing)",
+          "side pose standing still(right facing)": "side pose standing still(right facing)",
+          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
+          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+          "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
       }
+    },
+    {
+      "character": "Villain1",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "male",
+      "size": "tall 6'5 feet",
+      "role": "villain",
+      "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
+      "poseImageIds": {
+        "front pose standing still": "front pose standing still",
+          "side pose standing still(left facing)": "side pose standing still(left facing)",
+          "side pose standing still(right facing)": "side pose standing still(right facing)",
+          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
+          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+          "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
+      }
+    },
+    {
+      "character": "Villain1",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "male",
+      "size": "tall 6'5 feet",
+      "role": "villain",
+      "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
+      "poseImageIds": {
+        "front pose standing still": "front pose standing still",
+          "side pose standing still(left facing)": "side pose standing still(left facing)",
+          "side pose standing still(right facing)": "side pose standing still(right facing)",
+          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
+          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+          "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
+      }
+    },
     ],
 }
 
@@ -230,7 +294,31 @@ const transformJson = (originalJson) => {
   return transformedJson;
 };
 
- 
+ const addPoseImageIdsToCharacters = (panels, characters) => {
+  // Create a map for quick access to character pose IDs
+  const characterPoses = characters.reduce((acc, character) => {
+    acc[character.character] = character.poseImageIds["front pose standing still"];
+    return acc;
+  }, {});
+
+  // Iterate over each panel and each character to add the poseImageId
+  return panels.map(panel => {
+    if (panel.type === 'character dialogues single') {
+      panel.content = panel.content.map(content => {
+        if (content.character !== 'Narrator') {
+          // Add poseImageId to the character
+          return {
+            ...content,
+            poseImageId: characterPoses[content.character],
+            character_relative_location_in_panel:"center",
+          };
+        }
+        return content;
+      });
+    }
+    return panel;
+  });
+};
 //data = transformJson(data);
 function modifyPanelsForNarratorAndDialogueLength(panels) {
   let lastCharacterPanel = null;
@@ -285,6 +373,63 @@ function modifyPanelsForNarratorAndDialogueLength(panels) {
 
   return modifiedPanels; // Return the array with the added object panels
 }
+const addPoseImageIdsToCharacter = (panels, characters) => {
+  // Create a map for quick access to character pose IDs
+  const characterInfo = characters.reduce((acc, character) => {
+    acc[character.character] = {
+      role: character.role,
+      poseImageIds: character.poseImageIds,
+    };
+    return acc;
+  }, {});
+
+  // Helper function to determine if all characters have the same role
+  const allCharactersHaveRole = (contents, role) => 
+    contents.every(content => characterInfo[content.character].role === role);
+
+  // Iterate over each panel and update character locations and poses
+  return panels.map(panel => {
+    if (panel.type === 'character dialogues single' || panel.type === 'narrator') {
+      let contents = panel.content.filter(content => content.character !== 'Narrator');
+      
+      if (contents.length === 2 && (allCharactersHaveRole(contents, 'hero/good') || allCharactersHaveRole(contents, 'normal')|| allCharactersHaveRole(contents, 'villian'))) {
+        contents = contents.map((content, index) => ({
+          ...content,
+          character_relative_location_in_panel: index === 0 ? 'left' : 'right',
+          poseImageId: index === 0 ? 
+            characterInfo[content.character].poseImageIds['side pose standing still(right facing)'] :
+            characterInfo[content.character].poseImageIds['side pose standing still(left facing)'],
+        }));
+      } else if ((contents.length === 3 && allCharactersHaveRole(contents, 'hero/good')) || allCharactersHaveRole(contents, 'normal') || allCharactersHaveRole(contents, 'villian')) {
+        contents = contents.map((content, index) => ({
+          ...content,
+          character_relative_location_in_panel: ['left', 'center', 'right'][index],
+          poseImageId: [
+            characterInfo[content.character].poseImageIds['side pose standing still(right tilted)'],
+            characterInfo[content.character].poseImageIds['front pose standing still'],
+            characterInfo[content.character].poseImageIds['side pose standing still(left tilted)'],
+          ][index],
+        }));
+      } else if (contents.length > 3 && (allCharactersHaveRole(contents, 'hero/good') || allCharactersHaveRole(contents, 'normal') || allCharactersHaveRole(contents, 'villian'))) {
+        contents = contents.map((content, index) => ({
+          ...content,
+          character_relative_location_in_panel: index < 3 ? ['left', 'center', 'right'][index] : (index % 2 === 0 ? 'right' : 'left'),
+          poseImageId: characterInfo[content.character].poseImageIds['front pose standing still'],
+        }));
+      }
+
+      // Replace the content with the updated character information
+      panel.content = [
+        ...panel.content.filter(content => content.character === 'Narrator'), // Keep the narrator as is
+        ...contents,
+      ];
+    }
+    return panel;
+  });
+};
+
+// Use the function with your panel data
+
 
 
 // Extend transformJson to include modifyPanelsForNarratorAndDialogueLength processing
@@ -298,5 +443,18 @@ const transformJsonExtended = (originalJson) => {
 };
 
 // Assuming 'data' is the original JSON object you provided
-const transformedData = transformJsonExtended(data);
-console.log(JSON.stringify(transformedData, null, 2));
+//const transformedData = transformJsonExtended(data);
+const transformJsonFullyExtended = (originalJson) => {
+  let transformedJson = transformJsonExtended(originalJson); // Use the existing extended transformation logic
+
+  // Add poseImageIds to the characters
+  //transformedJson.panels = addPoseImageIdsToCharacters(transformedJson.panels, originalJson.characters);
+  transformedJson.panels = addPoseImageIdsToCharacters(transformedJson.panels, originalJson.characters);
+  transformedJson.panels = addPoseImageIdsToCharacter(transformedJson.panels, originalJson.characters);
+  
+  return transformedJson;
+};
+
+// Assuming 'data' is the original JSON object you provided
+const fullyTransformedData = transformJsonFullyExtended(data);
+console.log(JSON.stringify(fullyTransformedData, null, 2));

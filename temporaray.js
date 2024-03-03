@@ -15,18 +15,14 @@ data = {
             "dialogue": "This is going to be an exciting adventure, Aquaman!",
             "tone": "happy"
           },
-          {
-            "character": "Aquaman",
-            "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
-            "tone": "neutral"
-          },
+          
           {
             "character": "Hero2",
             "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
             "tone": "neutral"
           },
-          {
-            "character": "Hero2",
+           {
+            "character": "Villain1",
             "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
             "tone": "neutral"
           }
@@ -125,11 +121,11 @@ data = {
         "role": "hero/good",
         "description": "Goku, Son Goku, Orange outfit with a blue sash, black wristbands and boots, spiky black hair, and a tail",
         "poseImageIds": {
-          "front pose standing still": "front pose standing still",
-          "side pose standing still(left facing)": "side pose standing still(left facing)",
-          "side pose standing still(right facing)": "side pose standing still(right facing)",
-          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
-          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+          "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/bdcfda9b-4d11-4edb-9df7-1cab92e089eb/variations/Default_goku_0_bdcfda9b-4d11-4edb-9df7-1cab92e089eb_0.pn",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/4a3c7940-4daa-4c2f-a588-62b7fab01a18/variations/Default_Goku_0_4a3c7940-4daa-4c2f-a588-62b7fab01a18_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/4a3c7940-4daa-4c2f-a588-62b7fab01a18/variations/Default_Goku_0_4a3c7940-4daa-4c2f-a588-62b7fab01a18_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/00526681-34f1-4f2e-8f34-29d092c16cde/variations/Default_Goku_0_00526681-34f1-4f2e-8f34-29d092c16cde_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/00526681-34f1-4f2e-8f34-29d092c16cde/variations/Default_Goku_0_00526681-34f1-4f2e-8f34-29d092c16cde_0.png",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
         }
       },
@@ -141,11 +137,11 @@ data = {
         "role": "hero/good",
         "description": "Aquaman, Arthur Curry, Golden and green scale armor with a trident",
         "poseImageIds": {
-          "front pose standing still": "front pose standing still",
-          "side pose standing still(left facing)": "side pose standing still(left facing)",
-          "side pose standing still(right facing)": "side pose standing still(right facing)",
-          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
-          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+          "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8498bf75-fe3c-4e79-98cc-16fab79a6fc6/variations/Default_spiderman_0_8498bf75-fe3c-4e79-98cc-16fab79a6fc6_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf/variations/Default_spiderman_0_34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf/variations/Default_spiderman_0_34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/b6fce0c9-94d2-46f2-9b8d-9b3e2915e7ca/variations/Default_spiderman_0_b6fce0c9-94d2-46f2-9b8d-9b3e2915e7ca_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/b6fce0c9-94d2-46f2-9b8d-9b3e2915e7ca/variations/Default_spiderman_0_b6fce0c9-94d2-46f2-9b8d-9b3e2915e7ca_0.png",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
         }
       },
@@ -154,14 +150,14 @@ data = {
       "character_type": "comic/movie character who walks on two legs",
       "sound": "female",
       "size": "normal 5'7 feet",
-      "role": "hero/good",
+      "role": "normal",
       "description": "Hero2, a skilled archer with unmatched accuracy, wears a green and brown leather outfit, equipped with a quiver of arrows.",
       "poseImageIds": {
-        "front pose standing still": "front pose standing still",
-          "side pose standing still(left facing)": "side pose standing still(left facing)",
-          "side pose standing still(right facing)": "side pose standing still(right facing)",
-          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
-          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/b3d11e2a-fd23-4392-8ce8-a1c3148ebe32/variations/Default_man_standing_still_looking_at_camera_abs_full_body_le_0_b3d11e2a-fd23-4392-8ce8-a1c3148ebe32_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8bce9e52-3b72-4fa9-b054-79f3255c6c42/variations/Default_side_pose_of_man_full_body_face_0_8bce9e52-3b72-4fa9-b054-79f3255c6c42_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8bce9e52-3b72-4fa9-b054-79f3255c6c42/variations/Default_side_pose_of_man_full_body_face_0_8bce9e52-3b72-4fa9-b054-79f3255c6c42_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/60c574a6-8092-4bad-84b2-261e93483425/variations/Default_man_0_60c574a6-8092-4bad-84b2-261e93483425_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/60c574a6-8092-4bad-84b2-261e93483425/variations/Default_man_0_60c574a6-8092-4bad-84b2-261e93483425_0.png",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
       }
     },
@@ -173,11 +169,11 @@ data = {
       "role": "villain",
       "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
       "poseImageIds": {
-        "front pose standing still": "front pose standing still",
-          "side pose standing still(left facing)": "side pose standing still(left facing)",
-          "side pose standing still(right facing)": "side pose standing still(right facing)",
-          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
-          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/dc9f005d-fc78-4884-b778-d2c45d2c0be0/variations/Default_ultron_0_dc9f005d-fc78-4884-b778-d2c45d2c0be0_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ea6d05f5-2e53-4486-9f2a-3817eaa0aab4/variations/Default_Ultron_0_ea6d05f5-2e53-4486-9f2a-3817eaa0aab4_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ea6d05f5-2e53-4486-9f2a-3817eaa0aab4/variations/Default_Ultron_0_ea6d05f5-2e53-4486-9f2a-3817eaa0aab4_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a17fd06c-5227-40e1-a44f-bc3f7dea580d/Default_Ultron_0.jpg",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a17fd06c-5227-40e1-a44f-bc3f7dea580d/Default_Ultron_0.jpg",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
       }
     },
@@ -189,11 +185,11 @@ data = {
       "role": "villain",
       "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
       "poseImageIds": {
-        "front pose standing still": "front pose standing still",
-          "side pose standing still(left facing)": "side pose standing still(left facing)",
-          "side pose standing still(right facing)": "side pose standing still(right facing)",
-          "side pose standing still(left tilted)": "side pose standing still(left tilted)",
-          "side pose standing still(right tilted)": "side pose standing still(left tilted)",
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2034c35b-7b55-4195-8003-ef087c395092/variations/Default_optimus_prime_0_2034c35b-7b55-4195-8003-ef087c395092_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/9cd8a92e-5bf7-48ab-abff-f4b63c2065cc/variations/Default_Optimus_Prime_0_9cd8a92e-5bf7-48ab-abff-f4b63c2065cc_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/9cd8a92e-5bf7-48ab-abff-f4b63c2065cc/variations/Default_Optimus_Prime_0_9cd8a92e-5bf7-48ab-abff-f4b63c2065cc_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8fdce8fe-6cd6-4d00-bb8b-ab62746e258c/variations/Default_optimus_prime_0_8fdce8fe-6cd6-4d00-bb8b-ab62746e258c_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8fdce8fe-6cd6-4d00-bb8b-ab62746e258c/variations/Default_optimus_prime_0_8fdce8fe-6cd6-4d00-bb8b-ab62746e258c_0.png",
           "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
       }
     },
@@ -383,6 +379,12 @@ const addPoseImageIdsToCharacter = (panels, characters) => {
     return acc;
   }, {});
 
+  
+ const allCharactersAreGoodOrNormal = (contents) => 
+    contents.every(content => 
+      characterInfo[content.character].role === 'hero/good' || 
+      characterInfo[content.character].role === 'normal'
+    );
   // Helper function to determine if all characters have the same role
   const allCharactersHaveRole = (contents, role) => 
     contents.every(content => characterInfo[content.character].role === role);
@@ -391,8 +393,9 @@ const addPoseImageIdsToCharacter = (panels, characters) => {
   return panels.map(panel => {
     if (panel.type === 'character dialogues single' || panel.type === 'narrator') {
       let contents = panel.content.filter(content => content.character !== 'Narrator');
-      
-      if (contents.length === 2 && (allCharactersHaveRole(contents, 'hero/good') || allCharactersHaveRole(contents, 'normal')|| allCharactersHaveRole(contents, 'villian'))) {
+
+
+      if (contents.length === 2 && (allCharactersAreGoodOrNormal(contents)|| allCharactersHaveRole(contents, 'villain'))) {
         contents = contents.map((content, index) => ({
           ...content,
           character_relative_location_in_panel: index === 0 ? 'left' : 'right',
@@ -400,7 +403,7 @@ const addPoseImageIdsToCharacter = (panels, characters) => {
             characterInfo[content.character].poseImageIds['side pose standing still(right facing)'] :
             characterInfo[content.character].poseImageIds['side pose standing still(left facing)'],
         }));
-      } else if ((contents.length === 3 && allCharactersHaveRole(contents, 'hero/good')) || allCharactersHaveRole(contents, 'normal') || allCharactersHaveRole(contents, 'villian')) {
+      } else if ((contents.length === 3 && (allCharactersAreGoodOrNormal(contents) || allCharactersHaveRole(contents, 'villain')))) {
         contents = contents.map((content, index) => ({
           ...content,
           character_relative_location_in_panel: ['left', 'center', 'right'][index],
@@ -410,8 +413,15 @@ const addPoseImageIdsToCharacter = (panels, characters) => {
             characterInfo[content.character].poseImageIds['side pose standing still(left tilted)'],
           ][index],
         }));
-      } else if (contents.length > 3 && (allCharactersHaveRole(contents, 'hero/good') || allCharactersHaveRole(contents, 'normal') || allCharactersHaveRole(contents, 'villian'))) {
+      } else if (contents.length > 3 && (allCharactersAreGoodOrNormal(contents) || allCharactersHaveRole(contents, 'villain'))) {
         contents = contents.map((content, index) => ({
+          ...content,
+          character_relative_location_in_panel: index < 3 ? ['left', 'center', 'right'][index] : (index % 2 === 0 ? 'right' : 'left'),
+          poseImageId: characterInfo[content.character].poseImageIds['front pose standing still'],
+        }));
+      }
+      else{
+         contents = contents.map((content, index) => ({
           ...content,
           character_relative_location_in_panel: index < 3 ? ['left', 'center', 'right'][index] : (index % 2 === 0 ? 'right' : 'left'),
           poseImageId: characterInfo[content.character].poseImageIds['front pose standing still'],
@@ -428,7 +438,41 @@ const addPoseImageIdsToCharacter = (panels, characters) => {
   });
 };
 
-// Use the function with your panel data
+const adjustDialogueBasedOnMajorityRole = (panels, characters) => {
+  // First, create a mapping of characters to their roles for quick lookup.
+   const characterRoles = characters.reduce((acc, character) => {
+    // Treat 'normal' characters as 'hero/good'
+    acc[character.character] = character.role === 'normal' ? 'hero/good' : character.role;
+    return acc;
+  }, {});
+
+  // Helper function to count roles in a panel
+  const countRolesInPanel = (panelContent) => {
+    return panelContent.reduce((acc, content) => {
+      const role = characterRoles[content.character];
+      if (role) { // Skip if character is 'Narrator'
+        acc[role] = (acc[role] || 0) + 1;
+      }
+      return acc;
+    }, {});
+  };
+
+  // Process each panel
+  return panels.map(panel => {
+    if (panel.type === 'narrator' || panel.type === 'character dialogues single') {
+      const roleCounts = countRolesInPanel(panel.content);
+      const majorityRole = roleCounts['hero/good'] >= (roleCounts['villain'] || 0) ? 'hero/good' : 'villain';
+
+      // Filter out dialogues for characters of the minority role
+      panel.content = panel.content.filter(content => {
+        // Keep the dialogue if the character is a narrator or belongs to the majority role
+        return content.character === 'Narrator' || characterRoles[content.character] === majorityRole;
+      });
+    }
+    return panel;
+  });
+};
+
 
 
 
@@ -448,9 +492,10 @@ const transformJsonFullyExtended = (originalJson) => {
   let transformedJson = transformJsonExtended(originalJson); // Use the existing extended transformation logic
 
   // Add poseImageIds to the characters
-  //transformedJson.panels = addPoseImageIdsToCharacters(transformedJson.panels, originalJson.characters);
   transformedJson.panels = addPoseImageIdsToCharacters(transformedJson.panels, originalJson.characters);
+ 
   transformedJson.panels = addPoseImageIdsToCharacter(transformedJson.panels, originalJson.characters);
+  transformedJson.panels = adjustDialogueBasedOnMajorityRole(transformedJson.panels, originalJson.characters);
   
   return transformedJson;
 };

@@ -31,7 +31,7 @@ data = {
         "location": "Coastal town with bustling markets and ships",
         "background_sound": "people bustling",
         "background_music": "adventure",
-        "genId": "jjjjjjjjjjjjjjjjj",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/6685b6d9-ed89-4641-b6ce-4ee85f2f2a30/Default_Approaching_a_fogcovered_island_with_hidden_coves_gro_0.",
         "camera_movement": "down"
       },
       {
@@ -53,7 +53,7 @@ data = {
         "location": "Onboard a majestic sailing ship",
         "background_sound": "ocean/river waves",
         "background_music": "adventure",
-        "genId": "jjjjjjjjjjjjjjjjj",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a31d8095-5785-4a9c-aca4-03db2a46b3af/Default_on_the_deck_of_a_ship_ocean_sea_waves_0.jpg",
         "camera_movement": "zoom in"
       },
       
@@ -81,8 +81,8 @@ data = {
         importantObject:"stunning view of sunset",
         "background_sound": "birds chirping",
         "background_music": "adventure",
-        "genId": "jjjjjjjjjjjjjjjjj",
-        objectGenId: "somethingsomtinhhh",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a31d8095-5785-4a9c-aca4-03db2a46b3af/Default_on_the_deck_of_a_ship_ocean_sea_waves_0.jpg",
+        objectGenId: "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/1684f3fd-6931-4de8-ae75-07d1f0b77c9d/Default_Sandy_shore_with_hidden_caves_and_pirate_flags_0.jpg",
         "camera_movement": "down"
       },
       {
@@ -108,7 +108,7 @@ data = {
         "location": "Sandy shore with hidden caves and pirate flags",
         "background_sound": "ocean/river waves",
         "background_music": "adventure",
-        "genId": "jjjjjjjjjjjjjjjjj",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/1684f3fd-6931-4de8-ae75-07d1f0b77c9d/Default_Sandy_shore_with_hidden_caves_and_pirate_flags_0.jpg",
         "camera_movement": "zoom out"
       }
   ],

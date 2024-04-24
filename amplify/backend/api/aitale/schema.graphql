@@ -6,11 +6,6 @@ type User @model @auth(rules: [{allow: public}]) {
   name: String!
   posts: [String]
   savedPosts: [String]
-  interests: [String]
-  followers: [String]
-  likedPosts: [String]
-  dislikedPosts: [String]
-  viewedPosts: [String]
   credits: Int
 }
 
@@ -20,19 +15,11 @@ type Post @model @auth(rules: [{allow: public}]) {
   thumbnailUrl: String!
   userId: String!
   username: String!
-  views: Int!
-  dateCreated: AWSDateTime!
-  likes: Int!
-  dislikes: Int!
   saves: Int!
   nextParts: Int
+  previous: String
+  next:String
   hashtags: [String]
-  postDetails: PostDetails
-}
-
-type PostDetails {
-  title: String!
-  content: String!
 }
 
 type Hashtag @model @auth(rules: [{allow: public}]) {

@@ -19,6 +19,9 @@
       },
       "api": {
         "aitale": {}
+      },
+      "storage": {
+        "s3aitalestorageposts": {}
       }
     }
   }

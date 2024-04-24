@@ -24,13 +24,13 @@ const SocialSignInButtons = () => {
         fgColor="#DD4D44"
         logoType='google'
       />
-      <CustomButton
+      {/* <CustomButton
         text="Continue with Apple"
         onPress={onSignInApple}
         bgColor="#e3e3e3"
         fgColor="#363636"
         logoType='apple'
-      />
+      /> */}
     </>
   );
 };

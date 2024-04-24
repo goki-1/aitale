@@ -733,3 +733,555 @@ export default HomeScreen;
   //   }
   // };
 
+
+
+  data = {
+    title : "fighty fighty",
+    "visualStyle": "realistic",
+    "panels": [{
+      
+          "type": "character dialogues",
+          "content": [
+            {
+              "character": "Narrator",
+              "dialogue": "In a world where legends and heroes collide, Goku and Aquaman set out on an epic journey to meet the notorious pirates of the Caribbean.",
+              "tone": "neutral"
+            },
+            {
+              "character": "Goku",
+              "dialogue": "This is going to be an exciting adventure, Aquaman!",
+              "tone": "happy"
+            },
+            {
+              "character": "Aquaman",
+              "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
+              "tone": "neutral"
+            }
+          ],
+          "fight_in_this_panel": "no fight",
+          "location": "Coastal town with bustling markets and ships",
+          "background_sound": "people bustling",
+          "background_music": "adventure",
+          "genId": "jjjjjjjjjjjjjjjjj",
+          "camera_movement": "down"
+        },
+        {
+          "type": "character dialogues",
+          "content": [
+            {
+              "character": "Narrator",
+              "dialogue": "As they board their ship, the salty breeze carries whispers of the pirate crew's fearsome reputation.",
+              "tone": "neutral"
+            },
+            {
+              "character": "Aquaman",
+              "dialogue": "The ocean beckons us, Goku. Let's sail towards the unknown!",
+              "tone": "happy"
+            },
+            {
+              "character": "Goku",
+              "dialogue": "I can sense the thrill of the upcoming encounter!",
+              "tone": "happy"
+            }
+          ],
+          "fight_in_this_panel": "no fight",
+          "location": "Onboard a majestic sailing ship",
+          "background_sound": "ocean/river waves",
+          "background_music": "adventure",
+          "genId": "jjjjjjjjjjjjjjjjj",
+          "camera_movement": "zoom in"
+        },
+        
+        {
+          "type": "character dialogues",
+          "content": [
+            {
+              "character": "Narrator",
+              "dialogue": "As they approach the mysterious island rumored to be the pirates' hideout, a sense of anticipation fills the air.",
+              "tone": "neutral"
+            },
+            {
+              "character": "Goku",
+              "dialogue": "The thrill of the unknown awaits us, Aquaman. Are you ready?",
+              "tone": "happy"
+            },
+            {
+              "character": "Aquaman",
+              "dialogue": "I am prepared, Goku. Our courage will guide us through any challenge.",
+              "tone": "happy"
+            }
+          ],
+          "fight_in_this_panel": "no fight",
+          "location": "Approaching a fog-covered island with hidden coves",
+          importantObject:"stunning view of sunset",
+          "background_sound": "birds chirping",
+          "background_music": "adventure",
+          "genId": "jjjjjjjjjjjjjjjjj",
+          objectGenId: "somethingsomtinhhh",
+          "camera_movement": "down"
+        },
+        {
+          "type": "character dialogues",
+          "content": [
+            {
+              "character": "Narrator",
+              "dialogue": "As Goku and Aquaman step onto the sandy shore, shadows of the pirate crew emerge from the mist, ready to confront the unexpected visitors.",
+              "tone": "surprised"
+            },
+            {
+              "character": "Goku",
+              "dialogue": "The pirates have come to greet us, Aquaman. It seems our reputation precedes us!",
+              "tone": "surprised"
+            },
+            {
+              "character": "Aquaman",
+              "dialogue": "Let's show them the strength of our alliance, Goku. The real adventure begins now!",
+              "tone": "surprised"
+            }
+          ],
+          "fight_in_this_panel": "fight",
+          "location": "Sandy shore with hidden caves and pirate flags",
+          "background_sound": "ocean/river waves",
+          "background_music": "adventure",
+          "genId": "jjjjjjjjjjjjjjjjj",
+          "camera_movement": "zoom out"
+        }
+    ],
+    "characters": [
+        {
+          "character": "Goku",
+          "character_type": "comic/movie character who walks on two legs",
+          "sound": "male",
+          "size": "normal 5'10 feet",
+          "role": "hero",
+          "description": "Goku, Son Goku, Orange outfit with a blue sash, black wristbands and boots, spiky black hair, and a tail",
+          "poseImageIds": {
+            "front pose standing still": "766ee8dd-b188-4801-9110-825a67ae0ff8",
+            "side pose standing still(left facing)": "daad58fe-a22f-4359-8062-2731f9f37c3a",
+            "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
+          }
+        },
+        {
+          "character": "Aquaman",
+          "character_type": "comic/movie character who walks on two legs",
+          "sound": "male",
+          "size": "normal 5'10 feet",
+          "role": "hero",
+          "description": "Aquaman, Arthur Curry, Golden and green scale armor with a trident",
+          "poseImageIds": {
+            "front pose standing still": "766ee8dd-b188-4801-9110-825a67ae0ff8",
+            "side pose standing still(left facing)": "daad58fe-a22f-4359-8062-2731f9f37c3a",
+            "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46"
+          }
+        }
+      ],
+  }
+  
+  const createCharacterDialogueSinglePanel = (parentPanel, character, index, initialAppearances) => {
+    const isInitialAppearance = !initialAppearances.includes(character.character);
+  
+  if (character.character === 'Narrator') {
+    if (isInitialAppearance) {
+      initialAppearances.push(character.character);
+    }
+      const cameraMovement = isInitialAppearance
+        ? { camera_movement: 'left to right' }
+        : { camera_movement: 'right to left' };
+  
+      return [{
+        type: 'character dialogues single',
+        content: [{
+          character: character.character,
+          dialogue: character.dialogue.trim(), // Remove leading/trailing whitespaces
+          gen_id: character.gen_id,
+          tone: character.tone,
+        }],
+        background_music: parentPanel.background_music,
+        index: index,
+        gen_id: parentPanel.gen_id,
+        ...cameraMovement,
+      }];
+    }
+  
+    const dialogues = character.dialogue.split(/[.,]/).filter(dialogue => dialogue.trim() !== "" 
+    && dialogue.trim() !== "." && dialogue.trim() !== ",");
+  
+  
+    const panels = dialogues.map((dialogue, i) => {
+      
+      const cameraMovement = isInitialAppearance && dialogue.length > 30
+      ? { camera_movement: 'zoom in and up' }
+      : { camera_movement: dialogue.length > 10 ? 'close up' : 'some random zoom in' };
+  
+      return {
+        type: 'character dialogues single',
+        content: [{
+          character: character.character,
+          dialogue: dialogue.trim(), // Remove leading/trailing whitespaces
+          gen_id: character.gen_id,
+          tone: character.tone,
+        }],
+        background_music: parentPanel.background_music,
+        index: index + i,
+        gen_id: parentPanel.gen_id,
+        ...cameraMovement,
+      };
+    });
+  
+    // Update initialAppearances if it's the initial appearance
+    if (isInitialAppearance) {
+      initialAppearances.push(character.character);
+    }
+  
+    return panels;
+  };
+  
+  // Main function to transform the original JSON
+  const transformJson = (originalJson) => {
+    let currentIndex = 0;
+    const charactersWithInitialAppearance = [];
+  
+    const transformedJson = {
+      ...originalJson,
+      panels: originalJson.panels.flatMap((panel, panelIndex) => {
+        const modifiedPanel = {
+          ...panel,
+          index: currentIndex++,
+        };
+  
+        const newPanels = [modifiedPanel];
+  
+        if (panel.type === 'character dialogues') {
+          panel.content.forEach((character, characterIndex) => {
+            const characterDialogueSinglePanels = createCharacterDialogueSinglePanel(
+              modifiedPanel,
+              character,
+              currentIndex,
+              charactersWithInitialAppearance
+            );
+  
+            // Concatenate new panels to the result
+            newPanels.push(...characterDialogueSinglePanels);
+  
+            currentIndex += characterDialogueSinglePanels.length;
+          });
+        }
+  
+        return newPanels;
+      }),
+    };
+  
+    return transformedJson;
+  };
+  
+   
+  data = transformJson(data);
+  console.log(JSON.stringify(data, null, 2))
+
+  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
+
+
+
+
+
+
+
+
+
+
+  const generateImagesForCharacter = async (characterArray) => {
+    const poseIds = {
+      "front pose standing still": "578c550e-d1d3-468d-afe3-988dbce0c038",
+      
+    };
+  
+    for (const character of characterArray) {
+      character.poseImageIds = {};
+            for (const pose in poseIds) {
+            const genId = poseIds[pose];
+            const prompt = character.description + "";
+            let generatedId;
+            try {
+              const apiUrlnobg = 'https://cloud.leonardo.ai/api/rest/v1/variations/nobg';
+              const apiUrl = 'https://cloud.leonardo.ai/api/rest/v1/generations';
+              const token = apiKey;
+              const requestData = {
+                prompt: prompt,
+                negative_prompt: "multiple faces, characters, deformed limbs, deformed fingers, deformed body",
+                modelId: DreamShaper,
+                width: 1024,
+                height: 768,
+                public: false,
+                presetStyle: 'LEONARDO',
+                num_images: 1,
+                //num_inference_steps: 22,
+                //init_generation_image_id: genId,
+                //init_strength: 0.4,
+                //controlNet: true,
+                //controlNetType: "POSE",
+              };
+              const headers = {
+                'accept': 'application/json',
+                'authorization': 'Bearer 26a31a79-bde8-4ed9-921f-3df58c090aa1',
+                'content-type': 'application/json',
+              };
+              const response = await axios.post(apiUrl,  { headers }, requestData);
+
+              generatedId = response.data.sdGenerationJob.generationId;
+              console.log(generatedId)
+              
+            } catch (error) {
+              console.error('Error generating image', error.response?.data ?? error.message);
+        }
+        
+  
+      
+      }
+      }
+    
+    
+  
+    return characterArray;
+  };
+
+      // const schemaReply = { 
+      //   type: "object",
+      //   properties: {
+      //     reply: {
+      //     type: "string",
+      //     enum: ["yes", "no"],
+      //     description: "reply yes if user input has sexual content otherwise reply no",
+      //     },
+      //     explaination:{
+      //       type:"string",
+      //       description:"explian why you replied yes or no"
+      //     }
+      //   }
+      //   }
+    //     const guidelineCheckPrompt = `Review the following user input for creating a comic book story. check if it has sexual content? --"${userInput}"`;
+  //   const guidelineCheckResponse = await instance.post('', {
+  //     model: "gpt-3.5-turbo",
+  //     messages: [
+  //       { role: "system", content: "You are a content moderator." },
+  //       { role: "user", content: guidelineCheckPrompt },
+  //     ],
+  //     tools: [
+  //       {
+  //         type: "function",
+  //         "function": {
+  //           "name": "content_moderator",
+  //           "description": "check if user input has sexual content",
+  //           "parameters": schemaReply
+  //         }
+  //       }
+  //       ],
+  //       tool_choice: {"type": "function", "function": {"name": "content_moderator"}}
+  //     })
+    
+
+  //   const guidelineCheckResult = guidelineCheckResponse.data.choices[0].message.tool_calls[0].function.arguments;
+  //   let count = guidelineCheckResponse.data.usage.total_tokens;
+  //   console.log("replying yes or no ---- ",guidelineCheckResult);
+  //   const jsonObject = JSON.parse(guidelineCheckResult);
+  // if (jsonObject.reply && jsonObject.reply.toLowerCase() === 'yes') {
+  //     setCreating('Please stick to community guidlines...');
+  //     setIsDisabled(false);
+  //     console.log("did not pass");
+  //     return;
+  //   }
+  //   console.log("passes the check ");
+
+
+  let data = {title : "fighty fighty",
+  "visualStyle": "realistic",
+  "panels": [
+    {
+        "type": "character dialogues",
+        "content": [
+          {
+            "character": "Narrator",
+            "dialogue": "In a world where legends and heroes collide, Goku and Aquaman set out on an epic journey ",
+            "tone": "neutral"
+          },
+          {
+            "character": "Goku",
+            "dialogue": "This is going to be an exciting adventure, Aquaman!",
+            "tone": "happy"
+          },
+          
+           {
+            "character": "Villain1",
+            "dialogue": "Indeed, Goku. The seas hold many secrets and dangers.",
+            "tone": "neutral"
+          }
+        ],
+        "fight_in_this_panel": "no fight",
+        "location": "Coastal town with bustling markets and ships",
+        "background_sound": "no sound",
+        "background_music": "sad",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/6685b6d9-ed89-4641-b6ce-4ee85f2f2a30/Default_Approaching_a_fogcovered_island_with_hidden_coves_gro_0.jpg",
+        "camera_movement": "down"
+      },
+      {
+        "type": "character dialogues",
+        "content": [
+         
+          {
+            "character": "Aquaman",
+            "dialogue": "The ocean beckons us, Goku. Let's sail towards the unknown!",
+            "tone": "happy"
+          },
+          {
+            "character": "Goku",
+            "dialogue": "I can sense the thrill of the upcoming encounter!",
+            "tone": "happy"
+          },
+          {
+            "character": "Goku",
+            "dialogue": "I can sense the thrill of the upcoming encounter!",
+            "tone": "happy"
+          }
+        ],
+        "fight_in_this_panel": "no fight",
+        "location": "Onboard a majestic sailing ship",
+        "background_sound": "explosion",
+        "background_music": "adventure",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a31d8095-5785-4a9c-aca4-03db2a46b3af/Default_on_the_deck_of_a_ship_ocean_sea_waves_0.jpg",
+        "camera_movement": "zoom in"
+      },
+      
+      {
+        "type": "character dialogues",
+        "content": [
+          {
+            "character": "Narrator",
+            "dialogue": "As they approach the mysterious island rumored to be the pirates' hideout",
+            "tone": "neutral"
+          },
+          {
+            "character": "Goku",
+            "dialogue": "The thrill of the unknown awaits us, Aquaman. Are you ready?",
+            "tone": "happy"
+          },
+          {
+            "character": "Aquaman",
+            "dialogue": "I am prepared, Goku. Our courage will guide us through any challenge.",
+            "tone": "happy"
+          }
+        ],
+        "fight_in_this_panel": "no fight",
+        "location": "Approaching a fog-covered island with hidden coves",
+        importantObject:"stunning view of sunset",
+        "background_sound": "birds chirping",
+        "background_music": "adventure",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a31d8095-5785-4a9c-aca4-03db2a46b3af/Default_on_the_deck_of_a_ship_ocean_sea_waves_0.jpg",
+        objectGenId: "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/1684f3fd-6931-4de8-ae75-07d1f0b77c9d/Default_Sandy_shore_with_hidden_caves_and_pirate_flags_0.jpg",
+        "camera_movement": "down"
+      },
+      {
+        "type": "character dialogues",
+        "content": [
+          {
+            "character": "Narrator",
+            "dialogue": "As Goku and Aquaman step onto the sandy shore, shadows of the pirate crew ",
+            "tone": "surprised"
+          },
+          {
+            "character": "Goku",
+            "dialogue": "The pirates have come to greet us, Aquaman. It seems our ",
+            "tone": "surprised"
+          },
+          {
+            "character": "Aquaman",
+            "dialogue": "Let's show them the strength of our alliance, Goku.",
+            "tone": "surprised"
+          }
+        ],
+        "fight_in_this_panel": "fight",
+        "location": "Sandy shore with hidden caves and pirate flags",
+        "background_sound": "thunder",
+        "background_music": "mystery",
+        "genId": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/1684f3fd-6931-4de8-ae75-07d1f0b77c9d/Default_Sandy_shore_with_hidden_caves_and_pirate_flags_0.jpg",
+        "camera_movement": "zoom out"
+      }
+  ],
+  "characters": [
+      {
+        "character": "Goku",
+        "character_type": "comic/movie character who walks on two legs",
+        "sound": "male",
+        "size": "normal 5'10 feet",
+        "role": "hero/good",
+        "description": "Goku, Son Goku, Orange outfit with a blue sash, black wristbands and boots, spiky black hair, and a tail",
+        "poseImageIds": {
+          "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/e178460a-2236-4376-ae9a-1b9195dbc60f/variations/Default_Tom_Holland_as_Spiderman_in_the_classic_red_and_blue_w_0_e178460a-2236-4376-ae9a-1b9195dbc60f_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/4a3c7940-4daa-4c2f-a588-62b7fab01a18/variations/Default_Goku_0_4a3c7940-4daa-4c2f-a588-62b7fab01a18_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/4a3c7940-4daa-4c2f-a588-62b7fab01a18/variations/Default_Goku_0_4a3c7940-4daa-4c2f-a588-62b7fab01a18_0.png",
+        }
+      },
+      {
+        "character": "Aquaman",
+        "character_type": "comic/movie character who walks on two legs",
+        "sound": "male",
+        "size": "normal 5'10 feet",
+        "role": "hero/good",
+        "description": "Aquaman, Arthur Curry, Golden and green scale armor with a trident",
+        "poseImageIds": {
+          "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ea72e979-509e-4aa9-a83f-fd7f9a19fe53/variations/Default_Robert_Downey_Jr_as_Ironman_in_the_iconic_red_and_gold_0_ea72e979-509e-4aa9-a83f-fd7f9a19fe53_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf/variations/Default_spiderman_0_34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf/variations/Default_spiderman_0_34fcbcc6-9d71-4e04-945a-c9ea0be1fcbf_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/0c60357e-a959-411a-8b39-d3d33e9137a5/variations/Default_back_pose_Robert_Downey_Jr_as_Ironman_in_the_iconic_re_0_0c60357e-a959-411a-8b39-d3d33e9137a5_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/0c60357e-a959-411a-8b39-d3d33e9137a5/variations/Default_back_pose_Robert_Downey_Jr_as_Ironman_in_the_iconic_re_0_0c60357e-a959-411a-8b39-d3d33e9137a5_0.png",
+          
+        }
+      },
+      {
+      "character": "Hero2",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "female",
+      "size": "normal 5'7 feet",
+      "role": "normal",
+      "description": "Hero2, a skilled archer with unmatched accuracy, wears a green and brown leather outfit, equipped with a quiver of arrows.",
+      "poseImageIds": {
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/b3d11e2a-fd23-4392-8ce8-a1c3148ebe32/variations/Default_man_standing_still_looking_at_camera_abs_full_body_le_0_b3d11e2a-fd23-4392-8ce8-a1c3148ebe32_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8bce9e52-3b72-4fa9-b054-79f3255c6c42/variations/Default_side_pose_of_man_full_body_face_0_8bce9e52-3b72-4fa9-b054-79f3255c6c42_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/8bce9e52-3b72-4fa9-b054-79f3255c6c42/variations/Default_side_pose_of_man_full_body_face_0_8bce9e52-3b72-4fa9-b054-79f3255c6c42_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/60c574a6-8092-4bad-84b2-261e93483425/variations/Default_man_0_60c574a6-8092-4bad-84b2-261e93483425_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/60c574a6-8092-4bad-84b2-261e93483425/variations/Default_man_0_60c574a6-8092-4bad-84b2-261e93483425_0.png",
+          
+      }
+    },
+    {
+      "character": "Villain2",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "male",
+      "size": "tall 6'5 feet",
+      "role": "villain",
+      "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
+      "poseImageIds": {
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/dc9f005d-fc78-4884-b778-d2c45d2c0be0/variations/Default_ultron_0_dc9f005d-fc78-4884-b778-d2c45d2c0be0_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ea6d05f5-2e53-4486-9f2a-3817eaa0aab4/variations/Default_Ultron_0_ea6d05f5-2e53-4486-9f2a-3817eaa0aab4_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ea6d05f5-2e53-4486-9f2a-3817eaa0aab4/variations/Default_Ultron_0_ea6d05f5-2e53-4486-9f2a-3817eaa0aab4_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a17fd06c-5227-40e1-a44f-bc3f7dea580d/Default_Ultron_0.jpg",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/a17fd06c-5227-40e1-a44f-bc3f7dea580d/Default_Ultron_0.jpg",
+        
+      }
+    },
+    {
+      "character": "Villain1",
+      "character_type": "comic/movie character who walks on two legs",
+      "sound": "male",
+      "size": "tall 6'5 feet",
+      "role": "villain",
+      "description": "Villain1, the fearsome leader of the pirate crew, dons a black and red coat, brandishing a cursed sword.",
+      "poseImageIds": {
+        "front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/edde5f6e-63f8-484e-bb2b-94088c292f6d/variations/Default_Venom_a_formidable_and_monstrous_being_with_dark_symbi_0_edde5f6e-63f8-484e-bb2b-94088c292f6d_0.png",
+          "side pose standing still(left facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/9cd8a92e-5bf7-48ab-abff-f4b63c2065cc/variations/Default_Optimus_Prime_0_9cd8a92e-5bf7-48ab-abff-f4b63c2065cc_0.png",
+          "side pose standing still(right facing)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/9cd8a92e-5bf7-48ab-abff-f4b63c2065cc/variations/Default_Optimus_Prime_0_9cd8a92e-5bf7-48ab-abff-f4b63c2065cc_0.png",
+          "side pose standing still(left tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/edde5f6e-63f8-484e-bb2b-94088c292f6d/variations/Default_Venom_a_formidable_and_monstrous_being_with_dark_symbi_0_edde5f6e-63f8-484e-bb2b-94088c292f6d_0.png",
+          "side pose standing still(right tilted)": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/edde5f6e-63f8-484e-bb2b-94088c292f6d/variations/Default_Venom_a_formidable_and_monstrous_being_with_dark_symbi_0_edde5f6e-63f8-484e-bb2b-94088c292f6d_0.png",
+          
+      }
+    },
+    ],
+}

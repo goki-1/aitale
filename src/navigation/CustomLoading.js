@@ -50,9 +50,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff', // Set your background color
   },
   logo: {
-    width: 100, // Set the width of your logo
-    height: 100, // Set the height of your logo
+    width: 70, // Set the width of your logo
+    height: 70, // Set the height of your logo
     marginBottom: 20,
+    //borderRadius:200,
   },
   loadingText: {
     fontSize: 18,

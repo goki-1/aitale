@@ -95,12 +95,7 @@ const Navigation = () => {
           name: user.name,
           posts: [],
           savedPosts: [],
-          interests: [],
-          followers: [],
-          likedPosts: [],
-          dislikedPosts: [],
-          viewedPosts: [],
-          credits: 10,
+          credits: 5,
         };
         try{
         const resul = await client.graphql({

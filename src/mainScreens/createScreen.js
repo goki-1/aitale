@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, ScrollView, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, ScrollView, Dimensions, Alert, ActivityIndicator, Button } from 'react-native';
 import { useNavigation, useRoute, useFocusEffect } from '@react-navigation/native';
-import dummyPosts from '../../Dataposts';
-import dummyUsers from '../../Data';
+import { uploadData, getUrl } from 'aws-amplify/storage';
 import { listUsers, listHashtags, getHashtag } from '../graphql/queries';
 import { createPost } from '../graphql/mutations';
 import { createHashtag, updateUser, updateHashtag } from '../graphql/mutations';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateClient } from 'aws-amplify/api';
+import { handleGenerateComicStory } from './handleGenerateComicStory';
 
 const CreateScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [creating, setCreating] = useState('');
   const { params } = route;
-  const currentUser = dummyUsers.find(user => user.id === 'user2');
+ 
   
   const [postid, setPostId] = useState(params?.id);
-  const [postToContinue, setPostToContinue] = useState(dummyPosts.filter(post => post.id === postid));
+  //const [postToContinue, setPostToContinue] = useState(dummyPosts.filter(post => post.id === postid));
   const [storyText, setStoryText] = useState('');
   const [user, setUser] = useState(null);
   const screenHeight = Dimensions.get('window').height;
@@ -30,7 +32,7 @@ const CreateScreen = () => {
 
   useEffect(() => {
     setPostId(params?.id);
-    setPostToContinue(dummyPosts.filter(post => post.id === params?.id));
+    //setPostToContinue(dummyPosts.filter(post => post.id === params?.id));
 
   }, [params]);
 
@@ -78,27 +80,34 @@ const CreateScreen = () => {
     }
   };
   const handleCreate = async () => {
+    setIsDisabled(true);
+    if(!user?.credits >= 5){
+      Alert.alert("You have low credits 🥲. Watch an Ad on profile page to get required credits.");
+      setIsDisabled(false);
+      return;
+    }
+    if (storyText.trim() === '') {
+      Alert.alert("You forgot to write story 🥲");
+      setIsDisabled(false);
+      return;
+    }
+    setCreating("Now let AI cook");
     const client = generateClient();
+    const postdetails = await handleGenerateComicStory(storyText);
 
-    //const userData = await readData('userdreamer');
+    const userData = await readData('userdreamer');
     
       try {
         const postData = {
-          title: 'Temporary heheheeg',
-          thumbnailUrl: 'https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/b0b28199-be76-41c9-b87a-b0f7a30a9e03/Leonardo_Diffusion_XL_the_city_streets_with_towering_skyscrape_0.jpg',
+          title: postdetails.title,
+          thumbnailUrl: 'https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/'+ postdetails.panels[0].genId,
           userId: user.id,
           username: user.username,
-          views: 0,
-          dateCreated: new Date().toISOString(),
-          likes: 0,
-          dislikes: 0,
           saves: 0,
           nextParts: 0,
-          hashtags: ['#superman', '#ironman', '#Loki'],
-          postDetails: {
-            title: 'Post Details Title',
-            content: 'Post Details Content',
-          },
+          previous: null,
+          next: null,
+          hashtags: [postdetails.hashtag],
         };
     
         const result = await client.graphql({
@@ -109,6 +118,18 @@ const CreateScreen = () => {
         console.log('Post created successfully:', result.data.createPost);
 
         const postId = result.data.createPost.id;
+
+        const t = JSON.stringify(postdetails)
+        try {
+          const result = await uploadData({
+            key: postId,
+            data: t,
+          }).result;
+          console.log('Succeeded: ', result);
+        } catch (error) {
+          console.log('Error : ', error);
+        }
+
         await storeData('dreamer' + postId, result.data.createPost);
         const updatedUserFields = {
           posts: [...userData.posts, postId],
@@ -119,7 +140,6 @@ const CreateScreen = () => {
           variables: { input: { id: user.id, ...updatedUserFields } },
         });
 
-        // Add hashtags and link them to the post
         const hashtagList = result.data.createPost.hashtags;
         for (const hashtag of hashtagList) {
           // Check if the hashtag exists with OR condition
@@ -146,7 +166,7 @@ const CreateScreen = () => {
             await client.graphql({
               query: updateHashtag,
               variables: { input: { id: existingHashtag.id, ...updatedHashtagFields } },
-            });
+            });                                       
           } else {
             // If hashtag doesn't exist, create a new entry
             const newHashtagData = {
@@ -163,9 +183,13 @@ const CreateScreen = () => {
         
         console.log('Hashtags created/updated successfully');
         
+        setCreating("Story is ready to view in your posts");
+        setIsDisabled(false);
 
       } catch (error) {
         console.error('Error creating post:', error);
+        //Alert.alert("Error while generating the story", error)
+        setIsDisabled(false);
       }
     
   };
@@ -177,7 +201,7 @@ const CreateScreen = () => {
   const handleCancel = () => {
     setStoryText('');
     setPostId(null);
-    setPostToContinue([]);
+    //setPostToContinue([]);
   };
 
   return (
@@ -213,21 +237,22 @@ const CreateScreen = () => {
         />
 
         {postid != null ? (
-          <TouchableOpacity style={styles.createButton} onPress={handleContinue}>
-            <Text style={styles.buttonText}>Continue</Text>
-          </TouchableOpacity>
+          <Button style={styles.createButton} onPress={handleContinue} title="Continue" disabled={isDisabled}/>
+            
         ) : (
-          <TouchableOpacity style={styles.createButton} onPress={handleCreate}>
-            <Text style={styles.buttonText}>Create</Text>
-          </TouchableOpacity>
+          <Button style={styles.createButton} onPress={handleCreate} title="Create" disabled={isDisabled}/>
+            
         )}
 
         <View style={styles.creditsContainer}>
         <Text style={styles.creditsText}>Remaining Credits: {user?.credits}</Text>
-        <Text style={styles.creditsTex}>Longer stories will consume more credits.</Text>
-        <Text style={styles.creditsTex}>Continuing existing stories require fewer credits.</Text>
-        <Text style={styles.creditsTex}>NSFW content is not allowed.</Text>
-
+        {/* <Text style={styles.creditsTex}>Longer stories will consume more credits.</Text> */}
+        <Text style={styles.creditsTex}>Major updates will come soon, if the App receives enough traction</Text>
+        {/* <Text style={styles.creditsTex}>Watch an Ad to get credits</Text> */}
+        {/* <Text style={styles.creditsTex}>Continuing existing stories require fewer credits</Text> */}
+        {/* <Text style={styles.creditsTex}>NSFW content is not allowed</Text> */}
+        <Text style={styles.credit}>{creating}</Text>
+        {creating == "Now let AI cook" && <ActivityIndicator color="#F0B27A"/>}
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
@@ -304,6 +329,11 @@ const styles = StyleSheet.create({
     marginTop: 1,
     color: 'white',
     fontSize: 14,
+  },
+  credit: {
+    marginTop: 10,
+    color: 'white',
+    fontSize: 24,
   },
 });
 

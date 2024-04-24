@@ -3,9 +3,6 @@ import { SafeAreaView, View, Text, FlatList, StyleSheet, ActivityIndicator, Touc
 import { useNavigation, useRoute } from '@react-navigation/native';
 import Post from '../components/Post';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import hashtagsTable from '../../DataTags';
-import dummyPosts from '../../Dataposts';
-import dummyUsers from '../../Data';
 
 const ProfilePosts = () => {
   const navigation = useNavigation();
@@ -31,15 +28,11 @@ const ProfilePosts = () => {
       id={item.id}
       tags={item.hashtags}
       title={item.title}
-      views={item.views}
       date={item.dateCreated}
       user={item.username}
       userid={item.userId}
       image={item.thumbnailUrl}
-      likes = {item.likes}
-      dislikes={item.dislikes}
       saves={item.saves}
-      content={item.postContent}
       nextParts={item.nextParts}
       showMyPosts={show}
     />

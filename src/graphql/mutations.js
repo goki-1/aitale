@@ -14,11 +14,6 @@ export const createUser = /* GraphQL */ `
       name
       posts
       savedPosts
-      interests
-      followers
-      likedPosts
-      dislikedPosts
-      viewedPosts
       credits
       createdAt
       updatedAt
@@ -39,11 +34,6 @@ export const updateUser = /* GraphQL */ `
       name
       posts
       savedPosts
-      interests
-      followers
-      likedPosts
-      dislikedPosts
-      viewedPosts
       credits
       createdAt
       updatedAt
@@ -64,11 +54,6 @@ export const deleteUser = /* GraphQL */ `
       name
       posts
       savedPosts
-      interests
-      followers
-      likedPosts
-      dislikedPosts
-      viewedPosts
       credits
       createdAt
       updatedAt
@@ -87,18 +72,11 @@ export const createPost = /* GraphQL */ `
       thumbnailUrl
       userId
       username
-      views
-      dateCreated
-      likes
-      dislikes
       saves
       nextParts
+      previous
+      next
       hashtags
-      postDetails {
-        title
-        content
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -116,18 +94,11 @@ export const updatePost = /* GraphQL */ `
       thumbnailUrl
       userId
       username
-      views
-      dateCreated
-      likes
-      dislikes
       saves
       nextParts
+      previous
+      next
       hashtags
-      postDetails {
-        title
-        content
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -145,18 +116,11 @@ export const deletePost = /* GraphQL */ `
       thumbnailUrl
       userId
       username
-      views
-      dateCreated
-      likes
-      dislikes
       saves
       nextParts
+      previous
+      next
       hashtags
-      postDetails {
-        title
-        content
-        __typename
-      }
       createdAt
       updatedAt
       __typename

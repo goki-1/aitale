@@ -6,18 +6,24 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
 import Navigation from './src/navigation';
 import Create from './Create';
+import AppContext from './AppContext';
+import PostTesting from './PostTesting';
 
 const App = () => {
   // Auth.signOut();
+  const [value, setValue] = useState(true);
   return (
+    <AppContext.Provider value={{ value, setValue }}>
     <SafeAreaView style={styles.root}>
-      {/* <Navigation /> */}
-      <Create/>
+      <Navigation />
+      {/* <PostTesting/> */}
+      {/* <Create/> */}
     </SafeAreaView>
+    </AppContext.Provider>
   );
 };
 

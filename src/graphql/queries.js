@@ -11,11 +11,6 @@ export const getUser = /* GraphQL */ `
       name
       posts
       savedPosts
-      interests
-      followers
-      likedPosts
-      dislikedPosts
-      viewedPosts
       credits
       createdAt
       updatedAt
@@ -38,11 +33,6 @@ export const listUsers = /* GraphQL */ `
         name
         posts
         savedPosts
-        interests
-        followers
-        likedPosts
-        dislikedPosts
-        viewedPosts
         credits
         createdAt
         updatedAt
@@ -61,18 +51,11 @@ export const getPost = /* GraphQL */ `
       thumbnailUrl
       userId
       username
-      views
-      dateCreated
-      likes
-      dislikes
       saves
       nextParts
+      previous
+      next
       hashtags
-      postDetails {
-        title
-        content
-        __typename
-      }
       createdAt
       updatedAt
       __typename
@@ -92,12 +75,10 @@ export const listPosts = /* GraphQL */ `
         thumbnailUrl
         userId
         username
-        views
-        dateCreated
-        likes
-        dislikes
         saves
         nextParts
+        previous
+        next
         hashtags
         createdAt
         updatedAt

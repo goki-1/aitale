@@ -21,15 +21,11 @@ const HomeScreen = () => {
       id={item.id}
       tags={item.hashtags}
       title={item.title}
-      views={item.views}
       date={item.dateCreated}
       user={item.username}
       userid={item.userId}
       image={item.thumbnailUrl}
-      likes = {item.likes}
-      dislikes={item.dislikes}
       saves={item.saves}
-      content={item.postContent}
       nextParts={item.nextParts}
     />
   );
@@ -105,7 +101,7 @@ const HomeScreen = () => {
             fontSize: 25,
             marginLeft: 8,
           }}>
-          Dreamai
+          Draema
         </Text>
       </View>
       <FlatList

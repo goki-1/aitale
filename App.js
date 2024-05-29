@@ -14,7 +14,7 @@ import AppContext from './AppContext';
 import PostTesting from './PostTesting';
 
 const App = () => {
-  // Auth.signOut();
+  ///Auth.signOut();
   const [value, setValue] = useState(true);
   return (
     <AppContext.Provider value={{ value, setValue }}>

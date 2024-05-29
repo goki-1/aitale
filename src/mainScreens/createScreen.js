@@ -36,9 +36,31 @@ const CreateScreen = () => {
 
   }, [params]);
 
+  const [time, setTime] = useState(0);
+
+  useEffect(() => {
+    setTime(0);
+    const intervalId = setInterval(() => {
+      setTime(prevTime => prevTime + 1);
+    }, 10); // Update every 10 milliseconds
+
+    // Cleanup function to clear the interval when component unmounts
+    return () => clearInterval(intervalId);
+  }, [creating]); // Run effect only once when component mounts
+
+  // Convert milliseconds to hours, minutes, seconds, and milliseconds
+  const minutes = Math.floor((time % 360000) / 6000);
+  const seconds = Math.floor((time % 6000) / 100);
+  const milliseconds = time % 100;
+
+  // Format the time
+  const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+
+
   useEffect(() => {
     const fetchUserData = async () => {
     const userData = await readData('userdreamer');
+    console.log("userdreamer---------", userData)
     setUser(userData);
     }
     fetchUserData();
@@ -87,7 +109,7 @@ const CreateScreen = () => {
       return;
     }
     if (storyText.trim() === '') {
-      Alert.alert("You forgot to write story 🥲");
+      Alert.alert("You forgot to write story.");
       setIsDisabled(false);
       return;
     }
@@ -252,7 +274,8 @@ const CreateScreen = () => {
         {/* <Text style={styles.creditsTex}>Continuing existing stories require fewer credits</Text> */}
         {/* <Text style={styles.creditsTex}>NSFW content is not allowed</Text> */}
         <Text style={styles.credit}>{creating}</Text>
-        {creating == "Now let AI cook" && <ActivityIndicator color="#F0B27A"/>}
+        
+        {creating == "Now let AI cook" && <ActivityIndicator color="#F0B27A"/> && <Text style={styles.credit}>{formattedTime}</Text> }
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

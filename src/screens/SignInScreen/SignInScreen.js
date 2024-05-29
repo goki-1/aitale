@@ -109,7 +109,7 @@ const SignInScreen = () => {
           onPress={onSignUpPress}
           type="TERTIARY"
         />
-        {/* <Text
+        <Text
         onPress={signOutt}
         style={{
           width: '100%',
@@ -120,7 +120,7 @@ const SignInScreen = () => {
           fontSize: 20,
         }}>
         Sign out
-      </Text> */}
+      </Text>
       </View>
     </ScrollView>
   );

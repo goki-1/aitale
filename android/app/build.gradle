@@ -73,13 +73,13 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.aitale"
+    namespace "com.draema"
     defaultConfig {
-        applicationId "com.aitale"
+        applicationId "com.draema"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.1"
     }
     signingConfigs {
         debug {
@@ -101,7 +101,9 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
+        
         release {
+            crunchPngs false
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.release

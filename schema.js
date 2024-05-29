@@ -7,11 +7,7 @@ const schema = {
       },
       hashtag:{
         type:"string",
-        description: "one word hashtag of the story. Could be main character or anything else"
-      },
-      visualStyle: {
-        "type": "string",
-        "description": "Preferred visual style, could be like realistic, anime, cartoonish etc"
+        description: "One word hashtag of the story. Could be main character or anything else"
       },
       panels: {
         type: "array",
@@ -51,11 +47,6 @@ const schema = {
                 required: ["character", "dialogue", "tone"],
               }, 
             },
-            // fight_in_this_panel:{
-            //   type:"string",
-            //   enum:["no fight","fight"],
-            //   description: `describe if there is any fight in this panel or not, if there is any fight then mention fight otherwise no fight`
-            // },
             location:{
               type:"string",
               description: "Describe Location and environment of the scene, a fictional or real-world location, be descriptive about it's features",
@@ -86,13 +77,13 @@ const schema = {
         items: {
           type: "object",
           properties: {
-            character: {
+            character_name: {
               type: "string",
               description: "Character's name in the panels should match exactly with this name(dont mention about narrator)"
             },
             character_type: {
               type: "string",
-              enum: [ "comic/movie character who walks on two legs","comic/movie character who walks on four legs","normal human","four legged normal animal", "robot", "monsterous"],
+              enum: [ "comic/movie character who walks on two legs","comic/movie character who walks on four legs","normal human","four legged normal animal", "robot", "monsterous", "car"],
             },
             sound: {
               type: "string",
@@ -106,19 +97,15 @@ const schema = {
             },
             role: {
               type: "string",
-              enum: ["villian", "hero/good", "normal"],
+              enum: ["villain", "hero/good", "normal"],
               description: "is the character good or bad"
             },
-            // describe_character_in_atmost_three_words:{
-            //   type:"string",
-            //   description: "describe character in atmost three words"
-            // },
           },
           required: ["character", "character_type", "sound", "size", "role"],
         }
       }
     },
-    required: ["title","visualStyle", "panels", "characters"]
+    required: ["title", "hashtag", "panels", "characters"]
     
   };
 

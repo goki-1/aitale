@@ -28,7 +28,7 @@ const ProfilePosts = () => {
       id={item.id}
       tags={item.hashtags}
       title={item.title}
-      date={item.dateCreated}
+      date={item.createdAt}
       user={item.username}
       userid={item.userId}
       image={item.thumbnailUrl}

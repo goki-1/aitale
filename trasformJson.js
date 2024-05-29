@@ -1,4 +1,29 @@
 
+const addObjectGenIdToPanels = (panels) => {
+  return panels.map(panel => {
+      if (!panel.objectGenId) {
+          panel.objectGenId2 = panel.genId;
+      }
+      return panel;
+  });
+};
+
+const adjustCameraMovementForMultipleCharacters = (panels) => {
+  return panels.map(panel => {
+      // Check if it's a panel with multiple characters and camera movement is 'zoom in and up'
+      if (panel.camera_movement === 'zoom in and up' && panel.content.length > 1) {
+          // Change camera movement to 'zoom in'
+          return {
+              ...panel,
+              camera_movement: 'zoom in',
+          };
+      }
+      // Return the panel unmodified if it doesn't meet the criteria
+      return panel;
+  });
+};
+
+  
   const createCharacterDialogueSinglePanel = (parentPanel, character, index, initialAppearances) => {
     const isInitialAppearance = !initialAppearances.includes(character.character);
   
@@ -175,6 +200,16 @@
         };
         modifiedPanels.push(objectPanel); // Add the new object panel to the modifiedPanels array
       }
+      if (panel.objectGenId2) {
+        const objectPanel = {
+          type: 'object2',
+          content: [],
+          genId: panel.objectGenId2,
+          camera_movement: "zoom in",
+          index: ind, // Increment the index slightly to insert after the current panel
+        };
+        modifiedPanels.push(objectPanel); // Add the new object panel to the modifiedPanels array
+      }
     
       ind ++;
     });
@@ -290,8 +325,10 @@
   
   // Extend transformJson to include modifyPanelsForNarratorAndDialogueLength processing
   const transformJsonExtended = (originalJson) => {
+    originalJson.panels = addObjectGenIdToPanels(originalJson.panels)
     const transformedJson = transformJson(originalJson); // Use the existing transformation logic
-  
+
+    //transformedJson.panels = addObjectGenIdToPanels(transformedJson.panels);
     // Modify panels as per the new requirements
     transformedJson.panels = modifyPanelsForNarratorAndDialogueLength(transformedJson.panels);
   
@@ -313,7 +350,22 @@
       return panel;
     });
   };
-  const transformJsonFullyExtended = (originalJson) => {
+  function addNewPanel(existingPanels, user) {
+    const newPanel = {
+      type: "end",
+      content: [
+      ],
+      user: user,
+      genId: "1f7aeb38-632d-4bda-acc6-67fd9f24030a/Default_black_0.jpg",
+      camera_movement: "zoom in",
+      index: existingPanels.length,
+    };
+  
+    return [...existingPanels, newPanel];
+  }
+  
+  
+  const transformJsonFullyExtended = (originalJson, user) => {
     let transformedJson = transformJsonExtended(originalJson); // Use the existing extended transformation logic
   
     // Add poseImageIds to the characters
@@ -322,7 +374,8 @@
     transformedJson.panels = addPoseImageIdsToCharacter(transformedJson.panels, originalJson.characters);
     transformedJson.panels = adjustDialogueBasedOnMajorityRole(transformedJson.panels, originalJson.characters);
     transformedJson.panels = adjustCameraMovementForSingleCharacterDialogue(transformedJson.panels);
-    
+    transformedJson.panels = adjustCameraMovementForMultipleCharacters(transformedJson.panels);
+    transformedJson.panels = addNewPanel(transformedJson.panels, user);
     return transformedJson;
   };
 

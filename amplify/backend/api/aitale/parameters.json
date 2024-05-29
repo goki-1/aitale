@@ -2,5 +2,5 @@
   "AppSyncApiName": "aitale",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
   "DynamoDBEnableServerSideEncryption": false,
-  "AuthModeLastUpdated": "2024-01-19T20:45:42.924Z"
+  "AuthModeLastUpdated": "2024-04-26T01:56:58.260Z"
 }

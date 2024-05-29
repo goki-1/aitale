@@ -121,10 +121,12 @@ const Navigation = () => {
         if((await readData('userdreamer')) == null && user){
           console.log("entering in else if");
           const user = await fetchUserAttributes();
+          console.log("fetch=====", user)
           const response = await client.graphql({
             query: getUser,
             variables: { id: user.given_name },
           });
+          console.log("respponseee", response);
           const use = response.data.getUser;
           await storeData('userdreamer', use);
         }

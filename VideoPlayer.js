@@ -248,17 +248,17 @@ const AnimatedImage = ({ imageUrl, translateY, scale, cameraMovement, translateX
         case 'some random zoom in':
           {
             const scaleAnimation = Animated.timing(scalee, { toValue: 3, duration: 1, useNativeDriver: true });
-            const translateAnimation = Animated.timing(translateYY, { toValue: 200, duration: 1, useNativeDriver: true });
+            const translateAnimation = Animated.timing(translateYY, { toValue: 250, duration: 1, useNativeDriver: true });
             
             const scaleAnimation2 = Animated.timing(scale, { toValue: 1.7, duration: 1, useNativeDriver: true });
-            const translateAnimation2 = Animated.timing(translateY, { toValue: 18, duration: 1, useNativeDriver: true });
+            const translateAnimation2 = Animated.timing(translateY, { toValue: 10, duration: 10000, useNativeDriver: true });
             
             return Animated.parallel([scaleAnimation, translateAnimation, scaleAnimation2, translateAnimation2]);
           }
           case 'close up':
           {
             const scaleAnimation = Animated.timing(scalee, { toValue: 3.8, duration: 1, useNativeDriver: true });
-            const translateAnimation = Animated.timing(translateYY, { toValue: 300, duration: 3, useNativeDriver: true });
+            const translateAnimation = Animated.timing(translateYY, { toValue: 350, duration: 3, useNativeDriver: true });
             
             const scaleAnimation2 = Animated.timing(scale, { toValue: 2, duration: 1, useNativeDriver: true });
             const translateAnimation2 = Animated.timing(translateX, { toValue: 18, duration: 3000, useNativeDriver: true });
@@ -375,13 +375,13 @@ const AnimatedImage = ({ imageUrl, translateY, scale, cameraMovement, translateX
           { transform: [{ translateY }, { translateX }, { scale }] },
           ]}
       />
-      { blurAmount == 30 &&
+      {/* { blurAmount == 30 &&
       <BlurView
         style={styles.image}
         blurType="light"
         blurAmount={1}
     
-      />}
+      />} */}
   {characterImages.map((character, index) => animateCharacterImage(character, index))}
     
 </View >
@@ -391,7 +391,7 @@ const AnimatedImage = ({ imageUrl, translateY, scale, cameraMovement, translateX
 const calculatePanelDuration = (panel) => {
   const baseDurationPerCharacter = 100; // milliseconds per character
   const additionalDurationPerPeriod = 1000; // additional milliseconds for each full stop
-if(panel.type === 'object'){
+if(panel.type === 'object' || panel.type === 'object2'){
   return 2000;
 }
   let totalDuration = 0;
@@ -407,7 +407,7 @@ if(panel.type === 'object'){
   return totalDuration;
 };
 
-const VideoPlayer = ({ data }) => {
+const VideoPlayer = ({ data, keye }) => {
   
   console.log("keyyyyyyyy")
   if(sound){
@@ -442,28 +442,28 @@ const VideoPlayer = ({ data }) => {
     return Promise.all(prefetchPromises);
   };  
 
-// useEffect(() => {
-//   AssignCharac(data);
-//   if(sound){
-//     sound.stop();
-//     sound.release();
-//   }
-//   if(music){
-//     music.stop();
-//     music.release();
-//   }
-//   console.log("qqqqqqqqqqqqqqqq")
-//   return () => {
-//     if(sound){
-//       sound.stop();
-//       sound.release();
-//     }
-//     if(music){
-//       music.stop();
-//       music.release();
-//     } // Release the sound resources
-//   };
-// })
+useEffect(() => {
+  AssignCharac(data);
+  if(sound){
+    sound.stop();
+    sound.release();
+  }
+  if(music){
+    music.stop();
+    music.release();
+  }
+  console.log("qqqqqqqqqqqqqqqq")
+  return () => {
+    if(sound){
+      sound.stop();
+      sound.release();
+    }
+    if(music){
+      music.stop();
+      music.release();
+    } // Release the sound resources
+  };
+})
 
   useEffect(() => {
     const currentPanel = data.panels[currentPanelIndex];
@@ -490,27 +490,27 @@ const VideoPlayer = ({ data }) => {
     });
   }, [currentPanelIndex, data.panels]);
 
-  // useEffect(() => {
-  //   console.log("changeddddddd", value)
-  //   if(sound){
-  //     sound.stop();
-  //     sound.release();
-  //   }
-  //   if(music){
-  //     music.stop();
-  //     music.release();
-  //   }
-  //   return () => {
-  //     if(sound){
-  //       sound.stop();
-  //       sound.release();
-  //     }
-  //     if(music){
-  //       music.stop();
-  //       music.release();
-  //     } // Release the sound resources
-  //   };
-  // }, [value, keye]);
+  useEffect(() => {
+    //console.log("changeddddddd", value)
+    if(sound){
+      sound.stop();
+      sound.release();
+    }
+    if(music){
+      music.stop();
+      music.release();
+    }
+    return () => {
+      if(sound){
+        sound.stop();
+        sound.release();
+      }
+      if(music){
+        music.stop();
+        music.release();
+      } // Release the sound resources
+    };
+  }, [ keye]);
   
   // const handlePress = () => {
   //   //console.log("j,fgq,hsvhjb")
@@ -553,6 +553,38 @@ const VideoPlayer = ({ data }) => {
                   ))}
                 </View>
               )}
+              
+              {data.panels[currentPanelIndex] &&
+                data.panels[currentPanelIndex].type === 'object' && (
+                  <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+                  <Text style={{ color: 'white', fontSize: 26, textAlign: 'center', marginBottom:20, }}>
+                    {data.panels[currentPanelIndex].genId &&
+                      data.panels[currentPanelIndex].genId.split('Default_')[1]?.split('_').slice(0, data.panels[currentPanelIndex].genId.split('Default_')[1]?.split('_').indexOf('high')).join(' ')}
+                    </Text>
+                    
+                    
+                  </View>
+                )}
+
+              {data.panels[currentPanelIndex] &&
+                data.panels[currentPanelIndex].type === 'end' && (
+                  <View style={{ alignItems: 'center', justifyContent: 'flex' }}>
+                    <Text style={{ color: 'white',   fontSize: 36,  marginLeft:40 }}>
+                      The End
+                    </Text>
+                    <Text style={{ color: 'white',   fontSize: 14,  marginLeft:40 }}>
+                    written by {data.panels[currentPanelIndex].user}
+                      
+                    </Text>
+                    <Text style={{ color: 'white',   fontSize: 14, marginBottom:100,marginLeft:20 }}>
+                    You will be able to continue the stories with next update
+                    </Text>
+                    {/* <Text style={{ color: 'white', fontSize: 14 }}>
+                      {data.title}
+                    </Text> */}
+                    
+                  </View>
+                )}
           </View>
         </View>
       )}

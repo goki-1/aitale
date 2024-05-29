@@ -21,7 +21,7 @@ const HomeScreen = () => {
       id={item.id}
       tags={item.hashtags}
       title={item.title}
-      date={item.dateCreated}
+      date={item.createdAt}
       user={item.username}
       userid={item.userId}
       image={item.thumbnailUrl}
@@ -58,7 +58,7 @@ const HomeScreen = () => {
     try {
       const result = await client.graphql({
         query: listPosts,
-        variables: { limit, nextToken: token },
+        variables: { limit, nextToken: token, sortField: "createdAt", sortDirection: "ASC" },
       });
 
       const newPosts = result.data.listPosts.items;

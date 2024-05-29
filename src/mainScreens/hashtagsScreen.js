@@ -62,7 +62,7 @@ const HashtagsScreen = () => {
       tags={item.hashtags}
       title={item.title}
       views={item.views}
-      date={item.dateCreated}
+      date={item.createdAt}
       user={item.username}
       userid={item.userId}
       image={item.thumbnailUrl}

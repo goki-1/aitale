@@ -24,14 +24,14 @@ function addRightFacingPose(characters) {
       });
 
    const panelNum = 5;
-      const prompt = `Return output in form of JSON of "${panelNum}" panels for making a Comic-book style video. Story mostly discribed by characters' dialogues or it could 
-      be background narrator. Make sure to fill the story gaps and include all the scenes mentioned by user and write a cohesive, good story from user's storyline. If user has used
-      inappropriate language you can give it little modification. Follow all the schema instructions. Storyline from user is -- "${userInput}"`;
+      const prompt = `Return detailed, consistent, creative data in form of JSON of panels for making a Comic-book style video. Story mostly discribed by characters' dialogues or it could 
+      be background narrator. Make sure to fill the story gaps and include all the scenes mentioned by user and write a cohesive, good screenplay from user's storyline. If user has used
+      inappropriate language you can make little modification. If the character's appearance changes give it another name. Follow all the schema instructions. Storyline from user is -- "${userInput}"`;
       const responsee = await instance.post('', {
         model: "gpt-3.5-turbo",
         temperature: 0.5,
         messages: [
-          { role: "system", content: "You are a detailed comic book storyteller and movie director." },
+          { role: "system", content: "You are the world's best movie director and comic-book story teller" },
           { role: "user", content: prompt },
         ],
         tools: [
@@ -39,7 +39,7 @@ function addRightFacingPose(characters) {
             type: "function",
             "function": {
               "name": "ComicStory",
-              "description": "return the detailed comic story by following schema",
+              "description": "return the detailed and best Screenplay by following schema",
               "parameters": schema
             }
           }

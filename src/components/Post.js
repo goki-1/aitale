@@ -40,7 +40,7 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
         const response = await fetch(getStringResult.url);
         if (response.ok) {
           const content = await response.text();
-          let dataa = transformJsonFullyExtended(JSON.parse(content));
+          let dataa = transformJsonFullyExtended(JSON.parse(content), user );
           dataa.panels = dataa.panels.filter(panel => panel.type !== "character dialogues");
 
           console.log("kkkkkkkkkkkkkkk");
@@ -80,10 +80,10 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
     const fetchData = async () => {
       try {
 
-        //const storedUserId = await readData('userdreamer');
-        //const response = await client.graphql({ query: getUser, variables: { id: storedUserId.id } });
-        //const userData = response.data.getUser;
-        const userData = "u"
+        const storedUserId = await readData('userdreamer');
+        const response = await client.graphql({ query: getUser, variables: { id: storedUserId.id } });
+        const userData = response.data.getUser;
+        //const userData = "u"
         setCurrentUser(userData);
         setIsSaved(userData.savedPosts.includes(id));
       } catch (error) {
@@ -230,7 +230,7 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
             <View style={styles.userCircle}>
             <Text style={styles.userInitial}>{user.charAt(0).toUpperCase()}</Text>
             </View>
-            <Text style={styles.username}>{user.length > 8 ? `${user.substring(0, 8)}..` : user}</Text>
+            <Text style={styles.username}>{user.length > 9 ? `${user.substring(0, 9)}..` : user}</Text>
         </View>
         <TouchableOpacity style={styles.borderButtonn} onPress={handleSavePress} disabled={isSaving}>
           {isSaving ? (
@@ -360,7 +360,7 @@ const styles = StyleSheet.create({
     color: '#fff',
   },
   username: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#fff',
     
   },

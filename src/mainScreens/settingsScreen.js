@@ -14,19 +14,17 @@ const optionsData = [
 ];
 
 const privacyPolicyText = `
-[Your App Name] Privacy Policy
+Draema Privacy Policy
 
-Last Updated: [Date]
+Last Updated: 30 April 2024
 
 1. Introduction:
 
-Welcome to [Your App Name]! This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can manage your personal information.
+Welcome to Draema! This Privacy Policy is meant to help you understand what information we collect, why we collect it, and how you can manage your personal information.
 
 2. Information We Collect:
 
 - User-Provided Information: We collect information you provide when you use our app, including but not limited to your username, email address, profile picture, and content you create.
-
-- Automatically Collected Information: We may collect certain information automatically, such as your device type, IP address, and usage data, to improve the app's functionality and user experience.
 
 - AI-Generated Data: Our AI technology may process and analyze content you provide to generate personalized video content and recommendations.
 
@@ -53,13 +51,13 @@ We may update this Privacy Policy from time to time. We will notify you of any s
 
 // Terms of Service
 const termsOfServiceText = `
-[App name] Terms of Service
+Draema Terms of Service
 
-Last Updated: 25 April 2024
+Last Updated: 30 April 2024
 
 1. Acceptance of Terms:
 
-By using [Your App Name], you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the app.
+By using Draema, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the app.
 
 2. User Content:
 
@@ -164,7 +162,7 @@ const SettingsScreen = () => {
       {/* Options */}
       <FlatList data={optionsData} keyExtractor={(item) => item.id} renderItem={renderOption} />
       <Text style={styles.optionTe}>Version 1.0</Text>
-      <Text style={styles.optionTe}>Iteration 2 is coming soon with more features</Text>
+      <Text style={styles.optionTe}>Version 2 is coming soon with more features including editing features</Text>
 
       {/* Modal for Privacy Policy and Terms of Service */}
       <Modal visible={modalVisible} transparent animationType="slide" onRequestClose={handleModalClose}>

@@ -107,7 +107,7 @@ const generateImagesForCharacter = async (characterArray) => {
         updatedCharacter.poseImageIds = {};
         for (const pose in poseIds) {
           try {
-            const prompt = removeDuplicateFirstTwoWords(character.description) + ", extremely high quality, detailed, Octane render";
+            const prompt = removeDuplicateFirstTwoWords(character.description) + ", extremely high quality, detailed";
             const requestData = {
               prompt: prompt,
               negative_prompt: "ugly, multiple faces, deformed limbs, deformed fingers, deformed body, low quality, blurred",
@@ -118,9 +118,9 @@ const generateImagesForCharacter = async (characterArray) => {
               public: false,
               //presetStyle: 'LEONARDO',
               num_images: 1,
-              num_inference_steps: 10,
+              num_inference_steps: 40,
               init_generation_image_id: poseIds[pose],
-              init_strength: 0.3,
+              init_strength: 0.4,
               controlNet: true,
               controlNetType: "POSE",
             };
@@ -180,8 +180,9 @@ function constructImageUrlbac( imageid, prompt) {
 
   const generateImageOfBackground = async (sceneDescription) => {
     try {
+      sceneDescription = sceneDescription.replace(/- /g, '');
       const requestData = {
-        prompt: sceneDescription + ", high quality, detailed",
+        prompt: sceneDescription + ", high quality, extremely detailed",
         negative_prompt: ", ugly, lazy, multiple faces, deformed limbs, deformed fingers, deformed body, poor quality, ugly, blurred",
         modelId: DreamShaper,
         width: 1360,
@@ -190,7 +191,7 @@ function constructImageUrlbac( imageid, prompt) {
         public: false,
         presetStyle: 'LEONARDO',
         num_images:1,
-        num_inference_steps: 10,
+        num_inference_steps: 30,
       };
       const response = await fetch('https://cloud.leonardo.ai/api/rest/v1/generations', {
         method: 'POST', 
@@ -204,7 +205,7 @@ function constructImageUrlbac( imageid, prompt) {
 
       const responseData = await response.json();
       const generatedId = responseData.sdGenerationJob.generationId;
-      let url = constructImageUrlbac(generatedId, sceneDescription + ", high quality, detailed");
+      let url = constructImageUrlbac(generatedId, sceneDescription + ", high quality, extremely detailed");
       url = url.replace(/__/g, '_');
       console.log("background photo  ",generatedId);
       return url;
@@ -224,7 +225,7 @@ const generateImagesForPanel = async (panel) => {
           if (locationGenIds[panel.location]) {
               panel.genId = locationGenIds[panel.location];
           } else {
-              panel.genId = await generateImageOfBackground(panel.location);
+              panel.genId = await generateImageOfBackground(panel.location + ", Low-shot");
               locationGenIds[panel.location] = panel.genId;
           }
           if(panel.importantObject){

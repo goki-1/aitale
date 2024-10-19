@@ -8,10 +8,13 @@ import { getUser } from '../graphql/queries';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { generateClient } from 'aws-amplify/api';
 import transformJsonFullyExtended from '../../trasformJson.js';
+import transformJson from '../../transformJson2';
 import VideoPlayer from '../../VideoPlayer';
+import VideoPlayer2 from '../../VideoPlayer2';
 import Tts from 'react-native-tts';
 import { uploadData, getUrl } from 'aws-amplify/storage';
 import AppContext from '../../AppContext';
+import Story from '../../Story.json'
 
 const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, showMyPosts=null, }) => {
   const client = generateClient();
@@ -36,18 +39,21 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const getStringResult = await getUrl({ key: id });
-        const response = await fetch(getStringResult.url);
-        if (response.ok) {
-          const content = await response.text();
-          let dataa = transformJsonFullyExtended(JSON.parse(content), user );
-          dataa.panels = dataa.panels.filter(panel => panel.type !== "character dialogues");
-
-          console.log("kkkkkkkkkkkkkkk");
+        // const getStringResult = await getUrl({ key: id });
+        // const response = await fetch(getStringResult.url);
+        // if (response.ok) {
+        //   const content = await response.text();
+        const content = Story;
+          //let dataa = transformJsonFullyExtended(JSON.parse(content), user );
+          console.log("lkllk",content)
+          let dataa = await transformJson(content)
+          //dataa.panels = dataa.panels.filter(panel => panel.type !== "character dialogues");
+        console.log("huyuyuy",dataa)
+        
           setData(dataa);
-        } else {
-          throw new Error('Failed to fetch data');
-        }
+        // } else {
+        //   throw new Error('Failed to fetch data');
+        // }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -55,26 +61,6 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
 
     fetchData();
   }, []);
-
-  // let dataa = {"title":"The Adventures of Alex and Lily","visualStyle":"comic book","panels":[{"type":"character dialogues",
-  // "content":[{"character":"Alex","dialogue":"Hey Lily, look at this mysterious map I found in the attic!","tone":"happy"},
-  // {"character":"Lily","dialogue":"Wow, that looks ancient. Where do you think it leads to, Alex?","tone":"curious"}],
-  // "location":"Attic of an old mansion","importantObject":"Mysterious map","background_sound":"no sound","background_music":"adventure",
-  // "genId":"82f289ac-e83f-41e8-bb6c-0b47fd056f64/Default_Attic_of_an_old_mansion_high_quality_detailed_0.jpg","camera_movement":"down"},
-  // {"type":"character dialogues","content":[{"character":"Alex","dialogue":"According to the map, we need to cross the enchanted forest and reach the hidden waterfall.",
-  // "tone":"excited"},{"character":"Lily","dialogue":"Enchanted forest? Sounds thrilling! Let's embark on this adventure, Alex.","tone":"adventurous"}],
-  // "location":"Edge of the enchanted forest","importantObject":"Enchanted forest","background_sound":"birds chirping","background_music":"epic_orchestral",
-  // "genId":"ee5f9617-a4d0-46e6-831f-f8f3fed6f5a8/Default_Edge_of_the_enchanted_forest_high_quality_detailed_0.jpg",
-  // "objectGenId":"0c5c3af0-1486-438c-a481-dbae58c5266d/Default_Enchanted_forest_high_quality_detailed_0.jpg","camera_movement":"up"},
-  // {"type":"character dialogues","content":[{"character":"Alex","dialogue":"Watch out, Lily! A mischievous pixie is trying to lead us astray.","tone":"worried"},
-  // {"character":"Lily","dialogue":"Don't worry, Alex. I've read about pixies. We just need to follow the fireflies.","tone":"confident"}],"location":"Within the enchanted forest",
-  // "importantObject":"Fireflies","background_sound":"forest ambiance","background_music":"fantasy","genId":"340fa037-128b-46c6-925b-6676de2f2174/Default_Within_the_enchanted_forest_high_quality_detailed_0.jpg","objectGenId":"1c0427a4-fc54-4355-97a5-9c30d74a9869/Default_Fireflies_high_quality_detailed_0.jpg","camera_movement":"zoom in"},{"type":"character dialogues","content":[{"character":"Alex",
-  // "dialogue":"We made it to the hidden waterfall, Lily! It's breathtaking.","tone":"awe-struck"},{"character":"Lily","dialogue":"The water is so clear and pure. This adventure was worth it, Alex.","tone":"happy"}],"location":"Hidden waterfall","importantObject":"Waterfall","background_sound":"waterfall","background_music":"romantic","genId":"81795c2a-efaf-47ac-a3f0-cfe7da14b875/Default_Hidden_waterfall_high_quality_detailed_0.jpg","objectGenId":"9bfb5e6d-ce77-4d9a-a23c-e1c4398c6ee5/Default_Waterfall_high_quality_detailed_0.jpg","camera_movement":"down"},{"type":"character dialogues","content":[{"character":"Narrator","dialogue":"And so, Alex and Lily's courage and friendship led them to discover the beauty of the unknown, forging a bond that would last a lifetime.","tone":"neutral"}],"location":"Enchanted forest clearing","background_sound":"no sound","background_music":"adventure","genId":"5eb5dbde-d05f-4b96-9706-ec2c05c331d3/Default_Enchanted_forest_clearing_high_quality_detailed_0.jpg","camera_movement":"down"}],"characters":[{"character":"Alex","character_type":"normal human","sound":"male","size":"normal 5'10 feet","role":"hero/good","description":"Alex, 20s, male, Caucasian, short brown hair, blue t-shirt, jeans and sneakers","poseImageIds":{"front pose standing still":"41e76fcc-8417-4dad-b51f-b7ad026d0689/Default_Alex_20s_male_Caucasian_short_brown_hair_blue_tshirt_j_0.png","side pose standing still(left facing)":"fe3c11e1-af6a-4814-b198-3f834c53123f/Default_Alex_20s_male_Caucasian_short_brown_hair_blue_tshirt_j_0.png","side pose standing still(right facing)":"fe3c11e1-af6a-4814-b198-3f834c53123f/Default_Alex_20s_male_Caucasian_short_brown_hair_blue_tshirt_j_0.png"}},{"character":"Lily","character_type":"normal human","sound":"female","size":"normal 5'10 feet","role":"hero/good","description":"Lily, 20s, female, Asian, long black hair, pink blouse, skirt and sandals","poseImageIds":{"front pose standing still":"9997dd71-c8fb-4201-8d41-f91b1206e0b4/Default_Lily_20s_female_Asian_long_black_hair_pink_blouse_skir_0.png","side pose standing still(left facing)":"239177e4-27f7-4c3e-9b09-7f63695bde12/Default_Lily_20s_female_Asian_long_black_hair_pink_blouse_skir_0.png","side pose standing still(right facing)":"239177e4-27f7-4c3e-9b09-7f63695bde12/Default_Lily_20s_female_Asian_long_black_hair_pink_blouse_skir_0.png"}}]}
-  // dataa = transformJsonFullyExtended(dataa);
-  // dataa.panels = dataa.panels.filter(panel => panel.type !== "character dialogues");
-
-  //data = transformJsonFullyExtended(data);
-  //data.panels = data.panels.filter(panel => panel.type !== "character dialogues");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -164,10 +150,11 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
     console.log("isPlaying after state update:", isPlaying);
   }, [isPlaying]);
 
-  const [videoPlayerKey, setVideoPlayerKey] = useState(0);
-
+  //const [videoPlayerKey, setVideoPlayerKey] = useState(0);
+  const [videoPlayerKey, setVideoPlayerKey] = useState(false);
   const handlePause = () => {
-    setVideoPlayerKey(prevKey => prevKey + 1);
+    //setVideoPlayerKey(prevKey => prevKey + 1);
+    setVideoPlayerKey(!videoPlayerKey);
     if (isPlaying) {
     
       setIsPlaying(false);
@@ -203,7 +190,8 @@ const Post = ({ id, tags, title, date, user, userid, image, saves, nextParts, sh
       </View>
        :
          <View style={styles.postImage} resizeMode="cover">
-           <VideoPlayer data={data} keye={videoPlayerKey.toString()} /> 
+           {/* <VideoPlayer data={data} keye={videoPlayerKey.toString()} />  */}
+           <VideoPlayer2 data={data} playOrpause = {videoPlayerKey} />
           </View> 
       }
       </TouchableOpacity>

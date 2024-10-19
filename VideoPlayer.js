@@ -384,7 +384,7 @@ const AnimatedImage = ({ imageUrl, translateY, scale, cameraMovement, translateX
       />} */}
   {characterImages.map((character, index) => animateCharacterImage(character, index))}
     
-</View >
+    </View>
 
   );
 };
@@ -424,7 +424,7 @@ const VideoPlayer = ({ data, keye }) => {
 
   const preloadPanelImages = (panel) => {
     const imageUrls = [];
-  console.log("iiiiiiiiiiiiiii")
+    console.log("iiiiiiiiiiiiiii")
     // Add background image URL if exists
     if (panel.genId) {
       imageUrls.push(panel.genId);

@@ -1,0 +1,70 @@
+{
+    "title": "The Awakening of Invincible",
+    "hashtag": "Invincible",
+    "panels": [
+      {
+        "panel_number": 1,
+        "panel": {
+          "description_of_the_shot": "Bird-eye view, A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
+          "type_of_shot": "bird-eye",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/562c6ece-03f6-4761-8709-694ee3824bbd/Leonardo_Kino_XL_Birdeye_view_A_cozy_suburban_neighborhood_lin_2.jpg",
+          "background_sound": "birds chirping",
+          "background_music": "intrumental"
+        }
+      },
+      {
+        "panel_number": 2,
+        "panel": {
+          "description_of_the_shot": "A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
+          "type_of_shot": "vertically-stretched-shot",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2b3a3e89-6789-4824-bbe3-41032f5fa454/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
+          "background_sound": "no sound",
+          "background_music": "no music"
+        }
+      },
+      {
+        "panel_number": 3,
+        "panel": {
+          "description_of_the_shot": "A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
+          "type_of_shot": "horizontally-stretched-shot",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/4766b732-7058-49f2-bd22-ea4b040a2872/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
+          "background_sound": "wind",
+          "background_music": "fantasy"
+        }
+      },{
+        "panel_number": 4,
+        "panel": {
+          "description_of_the_shot": "low-shot, A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
+          "type_of_shot": "low-shot",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/135c66e5-9294-48d1-b066-b37f177ebe5e/Leonardo_Kino_XL_lowshot_A_cozy_suburban_neighborhood_lined_wi_1.jpg",
+          "background_sound": "wind",
+          "background_music": "sad"
+        }
+      }
+    
+    ],
+    "characters": [
+      {
+        "character": "Mark Grayson",
+        "base_character": "Mark Grayson",
+        "is_transformation_or_duplicate": false,
+        "character_type": "character with two legs",
+        "sound": "male",
+        "height": "normal 5'10 to 6 feet",
+        "role": "hero/good",
+        "costume_or_looks": "A young teen with an athletic build, brown hair styled casually, wearing casual clothing. He looks youthful and eager, with bright eyes full of wonder.",
+        "visual_characteristics_key": "Invincible_MarkGrayson_young_teen_casual"
+      },
+      {
+        "character": "Nolan Grayson",
+        "base_character": "Nolan Grayson",
+        "is_transformation_or_duplicate": false,
+        "character_type": "character with two legs",
+        "sound": "deep sound",
+        "height": "normal 5'10 to 6 feet",
+        "role": "hero/good",
+        "costume_or_looks": "A mature, powerful figure with a well-built frame. He has short cropped hair and a calming presence, wearing a sleek, form-fitting costume with a cape, signifying his status as a seasoned hero.",
+        "visual_characteristics_key": "Omni-Man_NolanGrayson_mature_hero_statue"
+      }
+    ]
+  }

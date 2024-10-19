@@ -1,4 +1,7 @@
 const schema = {
+  "name": "screenplay_for_short_comic_like_movie",
+  'strict': true,
+  "schema":{
     type: "object",
     properties: {
       title: {
@@ -45,6 +48,7 @@ const schema = {
                 //   }
                  },
                 required: ["character", "dialogue", "tone"],
+                additionalProperties: false,
               }, 
             },
             location:{
@@ -69,7 +73,8 @@ const schema = {
             },
             
           },
-          required: [ "type","content", "background_sound","background_music","location"],
+          required: [ "type","content", "background_sound","background_music","location", "importantObject"],
+          additionalProperties: false,
         },
       },
       characters: {
@@ -102,11 +107,13 @@ const schema = {
             },
           },
           required: ["character", "character_type", "sound", "size", "role"],
+          additionalProperties:false,
         }
       }
     },
-    required: ["title", "hashtag", "panels", "characters"]
-    
+    required: ["title", "hashtag", "panels", "characters"],
+    additionalProperties: false,
+  }
   };
 
   module.exports = schema;

@@ -12,11 +12,123 @@
           "background_music": "intrumental"
         }
       },
+
+      {
+          "panel_number": 9,
+          "panel": {
+            "sequence_of_actions": [
+              {
+                "character": "Nolan Grayson",
+                "action": "punching"
+              },
+              {
+                "character": "Mark Grayson",
+                "action": "being hit by punch"
+              }
+            ],
+            "team_winning": [
+              "Nolan Grayson",
+              "Mark Grayson"
+            ],
+            "losing_team": [],
+            "location_and_environment": "High above the cityscape, amidst the clouds and a clear blue sky. Rays of sunshine peak through the cloud cover, casting radiant beams that play across the air. Below, the city continues its bustle, unaware of the aerial activity.",
+            "indoor_or_outdoor": "outdoor",
+            "weather": "day",
+            "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/562c6ece-03f6-4761-8709-694ee3824bbd/Leonardo_Kino_XL_Birdeye_view_A_cozy_suburban_neighborhood_lin_2.jpg",
+            "background_sound": "wind",
+            "background_music": "epic_orchestral"
+          }
+      },
+
+      {
+        "panel_number": 1,
+        "panel": {
+          "content": [
+            {
+              "character": "Nolan Grayson",
+              "dialogue": "Ready for your first lesson, son?",
+              "emotion": "happy",
+              "positioning_of_character": "positioned opposite to one another",
+              "action_being_performed_or_state_of_character": "standing"
+            },
+            {
+              "character": "Mark Grayson",
+              "dialogue": "Let's do this!",
+              "emotion": "happy",
+              "positioning_of_character": "positioned opposite to one another",
+              "action_being_performed_or_state_of_character": "ready_for_attack"
+            }
+          ],
+          "location_and_environment": "An open field at the outskirts of the city, with lush grass stretching as far as the eye can see. The skyline is visible in the distance, providing a sense of proximity to urban life while remaining secluded enough for privacy.",
+          "indoor_or_outdoor": "outdoor",
+          "weather": "day",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2b3a3e89-6789-4824-bbe3-41032f5fa454/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
+          "background_sound": "wind",
+          "background_music": "adventure"
+        }
+      },
       {
         "panel_number": 2,
         "panel": {
-          "description_of_the_shot": "A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
-          "type_of_shot": "vertically-stretched-shot",
+          "content": [
+            {
+              "character": "Nolan Grayson",
+              "dialogue": "oohhh hoooo i will fly ",
+              "emotion": "happy",
+              "positioning_of_character": "positioned together",
+              "action_being_performed_or_state_of_character": "standing"
+            }
+           
+          ],
+          "location_and_environment": "An open field at the outskirts of the city, with lush grass stretching as far as the eye can see. The skyline is visible in the distance, providing a sense of proximity to urban life while remaining secluded enough for privacy.",
+          "indoor_or_outdoor": "outdoor",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2b3a3e89-6789-4824-bbe3-41032f5fa454/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
+          "weather": "day",
+          "background_sound": "wind",
+          "background_music": "adventure"
+        }
+      },
+      {
+        "panel_number": 3,
+        "panel": {
+          "content": [
+            {
+              "character": "Nolan Grayson",
+              "dialogue": "Dad look i can flye first lesson, dad?",
+              "emotion": "happy",
+              "positioning_of_character": "positioned opposite to one another",
+              "action_being_performed_or_state_of_character": "standing"
+            },
+            {
+              "character": "Mark Grayson",
+              "dialogue": "Let's do this, my son!",
+              "emotion": "happy",
+              "positioning_of_character": "positioned opposite to one another",
+              "action_being_performed_or_state_of_character": "ready_for_attack"
+            },
+            {
+              "character": "Nimi Grayson",
+              "dialogue": "My son will fly, Let's gooooo!",
+              "emotion": "happy",
+              "positioning_of_character": "positioned opposite to one another",
+              "action_being_performed_or_state_of_character": "ready_for_attack"
+            }
+           
+          ],
+          "location_and_environment": "An open field at the outskirts of the city, with lush grass stretching as far as the eye can see. The skyline is visible in the distance, providing a sense of proximity to urban life while remaining secluded enough for privacy.",
+          "indoor_or_outdoor": "outdoor",
+          "weather": "day",
+          "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2b3a3e89-6789-4824-bbe3-41032f5fa454/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
+          "background_sound": "wind",
+          "background_music": "adventure"
+        }
+      },
+      {
+        "panel_number": 2,
+        "panel": {
+          "location_and_environment": "A cozy suburban neighborhood lined with tidy houses and green lawns. The sun shines brightly in a clear blue sky above, casting long shadows from the charming homes. Birds are seen flitting from tree to tree, and there's a gentle breeze that rustles the leaves.",
+          "character": "Mark Grayson",
+          "reason_for_focusing": "normal entry",
           "genId" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/2b3a3e89-6789-4824-bbe3-41032f5fa454/Leonardo_Kino_XL_A_cozy_suburban_neighborhood_lined_with_tidy_2.jpg",
           "background_sound": "no sound",
           "background_music": "no music"
@@ -53,7 +165,12 @@
         "height": "normal 5'10 to 6 feet",
         "role": "hero/good",
         "costume_or_looks": "A young teen with an athletic build, brown hair styled casually, wearing casual clothing. He looks youthful and eager, with bright eyes full of wonder.",
-        "visual_characteristics_key": "Invincible_MarkGrayson_young_teen_casual"
+        "visual_characteristics_key": "Invincible_MarkGrayson_young_teen_casual",
+        "poseImageIds" : {"front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/ecc81c4d-ad3a-446c-9608-88244d262ac0/variations/Default_Mark_Grayson_also_known_as_Invincible_the_superhero_pr_3_ecc81c4d-ad3a-446c-9608-88244d262ac0_0.png",
+        "side pose standing still(left facing)" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/e569d485-9861-451d-ba80-2480d41b5ac2/variations/Default_Mark_Grayson_also_known_as_Invincible_the_superhero_pr_1_e569d485-9861-451d-ba80-2480d41b5ac2_0.png",
+        "punching": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/f877e984-6225-4225-9715-ef767aaa82ce/variations/Default_A_tall_man_delivering_a_powerful_punch_directly_toward_0_f877e984-6225-4225-9715-ef767aaa82ce_0.png",
+        "being hit by punch": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/d43c5762-4763-48e4-9c31-11bc9485205b/variations/Default_A_tall_man_delivering_a_powerful_punch_directly_toward_3_d43c5762-4763-48e4-9c31-11bc9485205b_0.png"
+      }
       },
       {
         "character": "Nolan Grayson",
@@ -64,7 +181,26 @@
         "height": "normal 5'10 to 6 feet",
         "role": "hero/good",
         "costume_or_looks": "A mature, powerful figure with a well-built frame. He has short cropped hair and a calming presence, wearing a sleek, form-fitting costume with a cape, signifying his status as a seasoned hero.",
-        "visual_characteristics_key": "Omni-Man_NolanGrayson_mature_hero_statue"
+        "visual_characteristics_key": "Omni-Man_NolanGrayson_mature_hero_statue",
+        "poseImageIds" : {"front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/23adb5e7-5b0b-4de8-8581-476d78b6026c/variations/Default_Nolan_Grayson_also_known_as_Invincible_the_superhero_p_3_23adb5e7-5b0b-4de8-8581-476d78b6026c_0.png",
+        "side pose standing still(left facing)" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/f8d6bf31-2dbd-44bd-b572-245d3354e5f7/variations/Default_Nolan_Grayson_also_known_as_Invincible_the_superhero_p_2_f8d6bf31-2dbd-44bd-b572-245d3354e5f7_0.png",
+        "punching": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/f877e984-6225-4225-9715-ef767aaa82ce/variations/Default_A_tall_man_delivering_a_powerful_punch_directly_toward_0_f877e984-6225-4225-9715-ef767aaa82ce_0.png",
+        "being hit by punch": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/d43c5762-4763-48e4-9c31-11bc9485205b/variations/Default_A_tall_man_delivering_a_powerful_punch_directly_toward_3_d43c5762-4763-48e4-9c31-11bc9485205b_0.png"
+      }
+      },
+      {
+        "character": "Nimi Grayson",
+        "base_character": "Nimi Grayson",
+        "is_transformation_or_duplicate": false,
+        "character_type": "character with two legs",
+        "sound": "female",
+        "height": "normal 5'10 to 6 feet",
+        "role": "hero/good",
+        "costume_or_looks": "A mature, powerful figure with a well-built frame. He has short cropped hair and a calming presence, wearing a sleek, form-fitting costume with a cape, signifying his status as a seasoned hero.",
+        "visual_characteristics_key": "Omni-Man_NolanGrayson_mature_hero_statue",
+        "poseImageIds" : {"front pose standing still": "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/e9f01719-a590-4f69-bd08-f3cdd152395e/variations/Default_a_slender_elegantly_dressed_woman_with_a_warm_and_invi_2_e9f01719-a590-4f69-bd08-f3cdd152395e_0.png",
+        "side pose standing still(left facing)" : "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/eda7af0f-84bf-4e29-9a9e-c88b0874ac75/variations/Default_a_slender_looking_side_elegantly_dressed_woman_with_a_0_eda7af0f-84bf-4e29-9a9e-c88b0874ac75_0.png"
+        }
       }
     ]
   }

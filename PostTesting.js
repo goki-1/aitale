@@ -26,11 +26,11 @@ const PostTesting = () => {
       <Post
       id={"sssss"}
       tags={["Ironaman"]}
-      title={"Aquaman and Ironamn"}
+      title={"{Title of the Video here}"}
       date={'2024-03-25T12:00:00Z'}
       user={"ush33423"}
       userid={"item.userId"}
-      image={"https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/6685b6d9-ed89-4641-b6ce-4ee85f2f2a30/Default_Approaching_a_fogcovered_island_with_hidden_coves_gro_0.jpg"}
+      image={"https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/bd9855f4-ae94-4e3d-a03f-e07ba1cece84/Leonardo_Lightning_XL_night_The_dark_world_is_intimidating_wit_0.jpg"}
       saves={0}
       nextParts={0}
     />

@@ -20,7 +20,7 @@ const schema = {
           type: "object",
             properties: {
               panel_number:{
-                type: "integer",
+                type: "number",
               },
               panel:{
           anyOf:[
@@ -68,13 +68,9 @@ const schema = {
             location_and_environment:{
               type:"string",
               description: `Describe Location and environment of the scene(more like landscape), a fictional or real-world location, be descriptive about it's features, 
-              remember not to mention any charcter's name and dont give description like 'similar to previous location'. Just pure discription of what place looks like, where scene is being carried out.`,
+              remember not to mention any character's name and dont give description like 'similar to previous location'. Just pure discription of what place looks like, where scene is being carried out.`,
             },
-            total_characters_in_this_scene:{
-              type: "integar",
-              description: `Total number of characters in this scene, it can be more than one`,
-            },
-
+           
             indoor_or_outdoor:{
                 type:"string",
                 enum:["indoor", "outdoor", "sky/space"],
@@ -153,7 +149,7 @@ const schema = {
               location_and_environment:{
                 type:"string",
                 description: `Describe Location and environment of the scene(more like landscape), a fictional or real-world location, be descriptive about it's features, 
-                remember not to mention any charcter's name and dont give description like 'similar to previous location'. Just pure discription of what place looks like`,
+                remember NOT to mention any character's name and dont give description like 'similar to previous location'. Just pure discription of what place looks like`,
               },
               
               indoor_or_outdoor:{
@@ -230,17 +226,15 @@ const schema = {
                 },
                 action: {
                   "type": "string",
-                  "enum": ["ready for attack","running to hit","punching", "kicking", "dodging", "being hit by punch", "being hit by kick", "shooting laser", "being hiy by laser", 
-                    "being hit on wall and dust covers the scene",
-                  ]
+                  // "enum": ["ready for attack","running to hit","punching", "kicking", "dodging", "being hit by punch", "being hit by kick", "shooting laser", "being hiy by laser", 
+                  //   "being hit on wall and dust covers the scene",
+                  // ]
+                  "enum" :["punching","being hit by punch"]
                 },
-                this_action_was_taken_against:{
-                  type: "string",
-                  description:"Name of the character this action was performed against. Should match the character's name as defined in the characters array."
-                }
+                
           
               },
-              "required": ["character", "action", "this_action_was_taken_against"],
+              "required": ["character", "action"],
               "additionalProperties": false
             }
           },
@@ -260,7 +254,8 @@ const schema = {
           },
           location_and_environment: {
             "type": "string",
-            "description": "Describe the location and environment of the scene (more like landscape), a fictional or real-world location. Be descriptive about its features, avoiding mentions of characters' names or vague descriptions like 'similar to previous location.' Just pure description of what the place looks like."
+            "description": `Describe the location and environment of the scene (more like landscape), a fictional or real-world location. Be descriptive about its features, 
+           do NOT mention any character or its name or vague descriptions like 'similar to previous location.' Just pure description of what the place looks like.`
           },
           indoor_or_outdoor: {
             "type": "string",
@@ -308,16 +303,16 @@ const schema = {
               type: "string",
               description: `Character's name in the panels should match exactly with this name(dont mention about narrator).`
             },
-            base_character: {
-              type: "string",
-              description: `The name of the base character, if this is a transformed or alternate version or alter ego or duplicate of another character
-               (e.g., Tony Stark for Ironman, Goku for Super Siyan 1,2,3, or Naruto shadow clone 1, Naruto shadow clone 2). 
-              If this is the base form, leave it as the same name as character.`
-            },
-            is_transformation_or_duplicate: {
-              type: "boolean",
-              description: "Indicates if this character is a transformation or alternate or duplicate version of another character."
-            },
+            // base_character: {
+            //   type: "string",
+            //   description: `The name of the base character, if this is a transformed or alternate version or alter ego or duplicate of another character
+            //    (e.g., Tony Stark for Ironman, Goku for Super Siyan 1,2,3, or Naruto shadow clone 1, Naruto shadow clone 2). 
+            //   If this is the base form, leave it as the same name as character.`
+            // },
+            // is_transformation_or_duplicate: {
+            //   type: "boolean",
+            //   description: "Indicates if this character is a transformation or alternate or duplicate version of another character."
+            // },
             
             character_type: {
               type: "string",
@@ -354,7 +349,7 @@ const schema = {
             'Ironman_Elon_Musk_Silver_Mark1', 'Man_Asian_30s_brownHair_businessSuit', 'Groot_babyTree', 'Invincible_MarkGrayson_yellowBlueSuit', Spiderman2099_MiguelOHara_futuristic).`
             },
           },
-          required: ["character","base_character","is_transformation_or_duplicate", "character_type", "sound", "height", "role", "costume_or_looks", "visual_characteristics_key"],
+          required: ["character", "character_type", "sound", "height", "role", "costume_or_looks", "visual_characteristics_key"],
           "additionalProperties": false,
         }
       }

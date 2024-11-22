@@ -5,32 +5,16 @@ const LeonardoVisionXL = "5c232a9e-9061-4777-980a-ddc8e65647c6";
 const KinoXL = "aa77f04e-3eec-4034-9c07-d0f619684628";
 const Lightning = "b24e16ff-06e3-43eb-8d33-4416c2d75876";
 const AnimeLightning = "e71a1c2f-4f80-4800-934f-2c68979d8cc8";
-const styleReference = '67';
-const characterReference = '133';
-const poseReference = '21';
+const styleReference = 67;
+const characterReference = 133;
+const poseReference = 21;
+const styleReferenceP = 166;
 
-import { LEO_PRO } from '@env';
-import axios from 'axios';
+const Pheonix = '6b645e3a-d64f-4341-a6d8-7a3690fbf042'
 const apiKey = "26a31a79-bde8-4ed9-921f-3df58c090aa1";
 const userId = "ad1fa781-4f92-4642-a3d3-a5bf85eec6e3";
 import { Image } from 'react-native';
 
-
-  const truncateString = (inputString, maxUnderscores) => {
-    // Replace special characters with underscores and remove extra whitespaces
-    const processedString = inputString.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_');
-    const underscoreCount = (processedString.match(/_/g) || []).length;
-
-    let truncatedString;
-    if (underscoreCount > maxUnderscores) {
-        // If there are more than `maxUnderscores` underscores, truncate the string
-        truncatedString = processedString.split('_').slice(0, maxUnderscores).join('_');
-    } else {
-        truncatedString = processedString;
-    }
-
-    return truncatedString;
-};
 
 const removeDuplicateFirstTwoWords = (inputString) => {
   const words = inputString.split(',').map(word => word.trim());
@@ -42,21 +26,104 @@ const removeDuplicateFirstTwoWords = (inputString) => {
 
 const initialprompt = (pose) => {
   if(pose == "front pose standing still")
-    return "";
-  if(pose == "side pose standing still")
-    return "looking sideways, ";
+    return "Full body, ";
+  if(pose == "side pose standing still(left facing)")
+    return "Full body, looking left, ";
+  if(pose == "side pose standing still(right facing)")
+    return "Full body, looking right, ";
   if(pose == "back pose standing still")
     return "Back pose, ";
+  if(pose == "punching")
+    return "Full body, punching, ";
+  if(pose == "being hit by punch")
+    return "Full body, dodging a punch, ";
+    
 };
+
+async function getId(id, retries = 6, delay = 10000) {
+    try {
+      const response = await fetch(`https://cloud.leonardo.ai/api/rest/v1/generations/${id}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        }
+      });
+  
+      if (!response.ok) 
+        throw new Error(`HTTP error! status: ${response.status}`);
+
+      const responseData = await response.json();
+      //console.log("iiiiiiiiii",responseData)
+      if(responseData.generations_by_pk.generated_images.length > 0){
+        console.log(responseData.generations_by_pk.generated_images[0].id)
+        return responseData.generations_by_pk.generated_images[0].id;
+      }
+     else
+        throw new Error(`Trying to get ID:`);
+    } catch (error) {
+      console.error(`Error id fetching data: ${error.message}`);
+  
+      if (retries > 0) {
+        console.log(`Retrying in ${delay / 1000} seconds... (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return getId(id, retries - 1, delay); // retry with reduced retries count
+      } else {
+        console.error("Failed to fetch data after multiple attempts.");
+        throw error; // Throw the error after all retries are exhausted
+      }
+    }
+  }
+
+
+async function getUrlforBg(id, retries = 4, delay = 9000) {
+    try {
+      const response = await fetch(`https://cloud.leonardo.ai/api/rest/v1/variations/${id}`, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+        }
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const responseData = await response.json();
+      const generatedId = responseData.generated_image_variation_generic[0].url;
+      if(generatedId !== null)
+        return generatedId;
+     else
+     {
+        throw new Error(`Trying to get URL:`);
+     }
+  
+    } catch (error) {
+      console.error(`Error url fetching data: ${error.message}`);
+  
+      if (retries > 0) {
+        console.log(`Retrying in ${delay / 1000} seconds.---.. (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return getUrlforBg(id, retries - 1, delay); // retry with reduced retries count
+      } else {
+        console.error("Failed to fetch data after multiple attempts.");
+        throw error; // Throw the error after all retries are exhausted
+      }
+    }
+  }
+
+
+
 
 async function checkimagesforbac(poses) {
   let images = {}
   for (const pose in poses) {
-    await verifyUrl(poses[pose]);
     id = poses[pose]
+
+    //id = await getId(id)
+    console.log("idddd",id)
     requestData = {
-      "id": id.substring(0, id.indexOf('/')),
-      "isVariation": true
+      "id": id,
     }
     const response = await fetch('https://cloud.leonardo.ai/api/rest/v1/variations/nobg', {
       method: 'POST',
@@ -68,8 +135,10 @@ async function checkimagesforbac(poses) {
       body: JSON.stringify(requestData)
     });
     const responseData = await response.json();
-    generatedId = responseData.sdGenerationJob.generationId;
-    let url = constructImageUrl(generatedId, prompt, style);
+    generatedId = responseData.sdNobgJob.id;
+    url = await getUrlforBg(generatedId);
+    
+    console.log(url)
     images[pose] = url;
   }
   return images
@@ -81,6 +150,9 @@ const generateImagesForCharacter = async (characterArray, style) => {
   const poseIdshuman = {
     "front pose standing still": "578c550e-d1d3-468d-afe3-988dbce0c038",
     "side pose standing still(left facing)": "45719c08-790a-42bb-9a39-e112386d34a3",
+    "side pose standing still(right facing)": "19d43419-23eb-4555-b624-3650dabd588d",
+    "punching" :"5881f73a-c69b-43fa-9397-e84dd3862b29",
+    "being hit by punch": "b96d523b-d678-457e-a95b-b7d14ca7583b"
     // "standing back pose": "de7968c9-737c-4fb6-974e-3dd0b83e6a46",
   };
   const poseIdsanimal = {
@@ -94,21 +166,22 @@ const generateImagesForCharacter = async (characterArray, style) => {
   }
   let poseIds = {};
   let updatedCharacterArray = [];
-  const promises = characterArray.map(async (character) => {
+   const promises = characterArray.map(async (character) => {
+    //for (const character of characterArray) {
     character.poseImageIds = {};
     let w,h;
     if (character.character_type == "character with two legs"){
       poseIds = poseIdshuman;
-      w = 720
-      h = 1280}
+      w = 736
+      h = 1120}
     else if (character.character_type == "four legged animal"){
       poseIds = poseIdsanimal;
-      w = 1080
-      h = 720}
+      h = 1120
+      w = 736}
     else{
       poseIds = poseIdsOther;
-      w = 720
-      h = 720}
+      w = 736
+      h = 1120}
     
     let updatedCharacter = { ...character };
     let description = character.character + ", "+ character.costume_or_looks
@@ -116,51 +189,40 @@ const generateImagesForCharacter = async (characterArray, style) => {
     if(style == "anime")
       model = AnimeLightning
 
-    try {
-      // let y = removeDuplicateFirstTwoWords(description);
-      // y = y.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_');
-      // y = truncateString(y, 4);
-      let y = style +"_" + character.visual_characteristics_key;
-      const getStringResult = await getUrl({ key: y });
-      const response = await fetch(getStringResult.url);
-      if (response.ok) {
-        const content = await response.text();
-        updatedCharacter.poseImageIds = JSON.parse(content);
-      } 
-      else {
-        // Handle the case where the string download fails
         updatedCharacter.poseImageIds = {};
         let generatedId = null;
-        for (const pose in poseIds) {
+        for (const pose of Object.keys(poseIds)) {
           let initi = initialprompt(pose);
           const controlnets = generatedId == null 
           ? [
-              {
-                "initImageId": poseIds[pose],
-                "initImageType": "GENERATED",
-                "strengthType": "High",
-                "preprocessorId": poseReference
-              }
+            //   {
+            //     "initImageId": poseIds[pose],
+            //     "initImageType": "GENERATED",
+            //     "preprocessorId": poseReference,
+            //     "weight": 0.5
+            //   }
             ]
           : [
-              {
-                "initImageId": poseIds[pose],
-                "initImageType": "GENERATED",
-                "strengthType": "High",
-                "preprocessorId": poseReference
-              },
+            //   {
+            //     "initImageId": poseIds[pose],
+            //     "initImageType": "GENERATED",
+            //     "preprocessorId": poseReference,
+            //     "weight": 0.4
+            //   },
               {
                 "initImageId": generatedId,
                 "initImageType": "GENERATED",
                 "preprocessorId": styleReference,
-                "strengthType": "High"
+                "strengthType": "High",
+            
               },
-              {
-                "initImageId": generatedId,
-                "initImageType": "GENERATED",
-                "preprocessorId": characterReference,
-                "strengthType": "High"
-              }
+            //   {
+            //     "initImageId": generatedId,
+            //     "initImageType": "GENERATED",
+            //     "preprocessorId": characterReference,
+            //     "strengthType": "Low",
+
+            //   }
             ];
           try {
             const prompt = initi + removeDuplicateFirstTwoWords(description) + ", extremely high quality, detailed";
@@ -171,12 +233,15 @@ const generateImagesForCharacter = async (characterArray, style) => {
               width: w,
               height: h,
               public: false,
-              alchemy: true,
-              presetStyle: 'DYNAMIC',
+              //alchemy: true,
+              //presetStyle: 'DYNAMIC',
               num_images:1,
+              //promptMagic: true,
               expandedDomain: true,
               highResolution: true,
-              controlnets: controlnets
+              //controlnets: controlnets,
+              init_generation_image_id: poseIds[pose],
+              init_strength: 0.20,
             };
             const response = await fetch('https://cloud.leonardo.ai/api/rest/v1/generations', {
               method: 'POST',
@@ -188,57 +253,61 @@ const generateImagesForCharacter = async (characterArray, style) => {
               body: JSON.stringify(requestData)
             });
             const responseData = await response.json();
+            console.log("=============",responseData)
             generatedId = responseData.sdGenerationJob.generationId;
-            let url = constructImageUrlbac(generatedId, prompt, style);
-            url = url.replace(/__/g, '_');
-            updatedCharacter.poseImageIds[pose] = url;
+            console.log("id----",generatedId)
+            
+            generatedId = await getId(generatedId);
+            updatedCharacter.poseImageIds[pose] = generatedId;
           } catch (error) {
             console.error('Error generating image for pose:', pose, error.response?.data ?? error.message);
           }
         }
-      
-
-      try {
-        updatedCharacter.poseImageIds = await checkimagesforbac(updatedCharacter.poseImageIds);
-        const result = await uploadData({ key: y, data: JSON.stringify(updatedCharacter.poseImageIds) }).result;
-        console.log('Succeeded: ', result);
-      } catch (error) {
-        console.log('Error uploading the character pictures: ', error);
-      }
-    }
+    
+      updatedCharacter.poseImageIds = await checkimagesforbac(updatedCharacter.poseImageIds);
       updatedCharacterArray.push(updatedCharacter);
-    } catch (error) {
-      console.error('Error downloading string from S3:', error);
-    }
+ 
   });
+    //}
 
   await Promise.all(promises);
   return updatedCharacterArray;
 };
 
-function constructImageUrl( imageid, prompt, style) {
-    const promptSlug = prompt.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_');
-    if (promptSlug.length > 54) {
-        return `${imageid}/variations/Default_${promptSlug.substring(0, 54)}_0_${imageid}_0.png`;
-    } else {
-        return `${imageid}/variations/Default_${promptSlug}_0_${imageid}_0.png`;
-    }
-}
-function constructImageUrlbac( imageid, prompt, model) {
-  st = "Leonardo_Lightning_XL_"
-  nu = 45
-  if(model == "anime"){
-    st = "Leonardo_Anime_XL_"
-    nu = 49
-  }
-    const promptSlug = prompt.replace(/[^\w\s]/gi, '').replace(/\s+/g, '_');
-    if (promptSlug.length > nu) {
-        return `${imageid}/${st}${promptSlug.substring(0, nu)}_0.jpg`;
-    } else {
-        return `${imageid}/${st}${promptSlug}_0.jpg`;
-    }
-}
+async function getBackUrl(id, retries = 7, delay = 10000) {
+  try {
+    const response = await fetch(`https://cloud.leonardo.ai/api/rest/v1/generations/${id}`, {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+      }
+    });
 
+    if (!response.ok) 
+      throw new Error(`HTTP error! status: ${response.status}`);
+
+    const responseData = await response.json();
+   
+    if(responseData.generations_by_pk.generated_images.length > 0){
+      console.log(responseData.generations_by_pk.generated_images[0].url)
+      return responseData.generations_by_pk.generated_images[0].url;
+    }
+   else
+      throw new Error(`Trying to get Url for background:`);
+  } catch (error) {
+    console.error(`Error id fetching data: ${error.message}`);
+
+    if (retries > 0) {
+      console.log(`Retrying in ${delay / 1000} seconds... (${retries} attempts left)`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return getBackUrl(id, retries - 1, delay); // retry with reduced retries count
+    } else {
+      console.error("Failed to fetch data after multiple attempts.");
+      throw error; // Throw the error after all retries are exhausted
+    }
+  }
+}
 
 
   const generateImageOfBackground = async (sceneDescription,style, paneltype, shottype) => {
@@ -273,7 +342,7 @@ function constructImageUrlbac( imageid, prompt, model) {
         modelId: model,
         width: w,
         height: h,
-        //promptMagic: true,
+        promptMagic: true,
         public: false,
         alchemy: true,
         presetStyle: 'DYNAMIC',
@@ -293,8 +362,8 @@ function constructImageUrlbac( imageid, prompt, model) {
 
       const responseData = await response.json();
       const generatedId = responseData.sdGenerationJob.generationId;
-      let url = constructImageUrlbac(generatedId, sceneDescription, style);
-      url = url.replace(/__/g, '_');
+      let url = await getBackUrl(generatedId);
+      
       console.log("background photo  ",generatedId);
       return url;
     } catch (error) {
@@ -306,31 +375,31 @@ function constructImageUrlbac( imageid, prompt, model) {
 
 const generateImagesForPanel = async (panel, style) => {
     try {
-        if(panel.content != null){
-            if(panel.indoor_or_outdoor == "outdoor"){
-                panel.genId = await generateImageOfBackground( panel.weather+ ", " + panel.location_and_environment,style, "content", null);
+        if(panel.panel.content != null){
+            if(panel.panel.indoor_or_outdoor == "outdoor"){
+                panel.panel.genId = await generateImageOfBackground( panel.panel.weather+ ", " + panel.panel.location_and_environment,style, "content", null);
             }
             else{
-                panel.genId = await generateImageOfBackground( panel.location_and_environment +", indoor", style, "content", null);   
+                panel.panel.genId = await generateImageOfBackground( panel.panel.location_and_environment +", indoor", style, "content", null);   
             }
         }
-        else if (panel.description_of_the_shot != null){
-            panel.genId = await generateImageOfBackground( panel.description_of_the_shot, style, "description", panel.type_of_shot);
+        else if (panel.panel.description_of_the_shot != null){
+            panel.panel.genId = await generateImageOfBackground( panel.panel.description_of_the_shot, style, "description", panel.panel.type_of_shot);
         }
-        else if(panel.reason_for_focusing != null){
-            if(panel.indoor_or_outdoor == "outdoor"){
-                panel.genId = await generateImageOfBackground( panel.weather+ ", " + panel.location_and_environment,style, "focus", null);
+        else if(panel.panel.reason_for_focusing != null){
+            if(panel.panel.indoor_or_outdoor == "outdoor"){
+                panel.panel.genId = await generateImageOfBackground( panel.panel.weather+ ", " + panel.panel.location_and_environment,style, "focus", null);
             }
             else{
-                panel.genId = await generateImageOfBackground(panel.location_and_environment +", indoor", style, "focus", null);   
+                panel.panel.genId = await generateImageOfBackground(panel.panel.location_and_environment +", indoor", style, "focus", null);   
             }
         }
-        else if(panel.sequence_of_actions != null){
-            if(panel.indoor_or_outdoor == "outdoor"){
-                panel.genId = await generateImageOfBackground( panel.weather+ ", " + panel.location_and_environment,style, "fight", null);
+        else if(panel.panel.sequence_of_actions != null){
+            if(panel.panel.indoor_or_outdoor == "outdoor"){
+                panel.panel.genId = await generateImageOfBackground( panel.panel.weather+ ", " + panel.panel.location_and_environment,style, "fight", null);
             }
             else{
-                panel.genId = await generateImageOfBackground(panel.location_and_environment +", indoor", style, "fight", null);   
+                panel.panel.genId = await generateImageOfBackground(panel.panel.location_and_environment +", indoor", style, "fight", null);   
             }
         }
           
@@ -346,13 +415,13 @@ const generateImagesForPanel = async (panel, style) => {
  const processComicBookStory = async (comicBookStory, style) => {
         comicBookStory = await Promise.all(comicBookStory.map(async (panel) => {
           
-          return await generateImagesForPanel(panel.panel, style);
+          return await generateImagesForPanel(panel, style);
         }));
         return comicBookStory;
     };
 
 
-    function extractUrlsFromObject(obj) {
+  function extractUrlsFromObject(obj) {
         const urls = [];
         const regex = /([^\s]+\.(jpg|png))/g; // Regular expression to match URLs or URLs with .jpg or .png
     
@@ -375,27 +444,6 @@ const generateImagesForPanel = async (panel, style) => {
         return urls;
     }
 
-  async function verifyUrl(ur) {
-    // Construct the full URL
-    ur = "https://cdn.leonardo.ai/users/ad1fa781-4f92-4642-a3d3-a5bf85eec6e3/generations/" + ur;
-    
-    // Start an infinite loop
-    while (true) {
-      try {
-        const response = await fetch(ur);
-        
-        // Check if the response is OK (status code 200-299)
-        if (response.ok) {
-          return true; // Image is available, return true
-        }
-      } catch (error) {
-        console.error("Error fetching URL: will try again hehe", error);
-      }
-      
-      // Wait for 10 seconds before retrying
-      await new Promise(resolve => setTimeout(resolve, 10000));
-    }
-  }
     
 
 async function verifyImageUrls(story) {

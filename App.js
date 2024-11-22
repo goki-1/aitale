@@ -14,17 +14,26 @@ import Create2 from './Create2';
 import AppContext from './AppContext';
 import PostTesting from './PostTesting';
 import Temp from './Temp';
+import { NavigationContainer } from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+const Stack = createNativeStackNavigator(); 
 const App = () => {
   ///Auth.signOut();
   const [value, setValue] = useState(true);
-  return (
+  return (  
     <AppContext.Provider value={{ value, setValue }}>
-    <SafeAreaView style={styles.root}>
-      {/* <Navigation /> */}
-      <PostTesting/>
-      {/* <Create2/> */}
-      {/* <Temp/> */}
-    </SafeAreaView>
+      <NavigationContainer>
+        <SafeAreaView style={styles.root}>
+        {/* <Navigation /> */}
+        {/* <PostTesting/> */}
+        {/* <Create2/> */}
+        {/* <Temp/> */}
+          <Stack.Navigator initialRouteName="Create2">
+            <Stack.Screen name="Create2" component={Create2} options={{ headerShown: false }} />
+            <Stack.Screen name="PostTesting" component={PostTesting} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </SafeAreaView>
+      </NavigationContainer>
     </AppContext.Provider>
   );
 };
